@@ -2,10 +2,11 @@ import React from "react";
 import styles from "../Success/Success.module.scss";
 import classNames from "classnames";
 import Title from "../../components/Title";
-import Button, {ButtonType} from "../../components/Button";
+import Button from "../../components/Button";
 import {Theme, useThemeContext} from "../../context/Theme/Context";
 import {NavLink} from "react-router-dom";
 import {RoutesList} from "../Router";
+import {ButtonType} from "../../utils/@globalTypes";
 
 const RegistrationConfirmation = () => {
 

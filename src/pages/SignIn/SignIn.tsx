@@ -1,12 +1,13 @@
 import React, {useState} from "react";
 import Title from "../../components/Title";
 import Input from "../../components/Input";
-import Button, {ButtonType} from "../../components/Button";
+import Button from "../../components/Button";
 import styles from "./SignIn.module.scss"
 import classNames from "classnames";
 import {Theme, useThemeContext} from "../../context/Theme/Context";
 import {NavLink} from "react-router-dom";
 import {RoutesList} from "../Router";
+import {ButtonType} from "../../utils/@globalTypes";
 
 const SignIn = () => {
     const [email, setEmail] = useState("");

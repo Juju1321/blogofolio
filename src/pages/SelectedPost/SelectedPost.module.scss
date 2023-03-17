@@ -1,7 +1,6 @@
 @import "src/assets/colors";
 
 .container {
-  padding-top: 72px;
   display: flex;
   flex-direction: column;
   border-bottom: 1px solid $medium;
@@ -22,7 +21,9 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
+  text-decoration: none;
   color: $secondary;
+  cursor: pointer;
 }
 
 .pipe {
@@ -37,6 +38,18 @@
   font-size: 16px;
   line-height: 24px;
   color: $gray;
+}
+
+.title {
+  margin: 0;
+  color: $secondary;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 56px;
+  line-height: 80px;
+}
+.darkTitle {
+  color: $white;
 }
 .imgTextContainer {
   display: flex;
@@ -65,7 +78,6 @@
 }
 
 .buttonContainer {
-  max-width: 922px;
   max-height: 56px;
   display: flex;
   justify-content: space-between;

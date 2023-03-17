@@ -7,7 +7,8 @@ import {NavLink} from "react-router-dom";
 import {RoutesList} from "../Router";
 import Title from "../../components/Title";
 import Input from "../../components/Input";
-import Button, {ButtonType} from "../../components/Button";
+import Button from "../../components/Button";
+import {ButtonType} from "../../utils/@globalTypes";
 
 const SignUp = () => {
       const [name, setName] = useState("")

@@ -1,8 +1,9 @@
 import React, {FC} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import classNames from "classnames";
+import {useNavigate} from "react-router-dom";
 
-import {CardProps, CardSize} from "./types";
+import {CardProps} from "./types";
 import {BookmarkIcon, DislikeIcon, LikeIcon, MoreIcon, SaveBookmarkIcon} from "../../assets/icons";
 import {
     LikeStatus,
@@ -13,11 +14,12 @@ import {
     setStatus
 } from "../../redux/reducers/postSlice";
 import {Theme, useThemeContext} from "../../context/Theme/Context";
+import {CardSize} from "../../utils/@globalTypes";
 import styles from "./Card.module.scss";
 
 
 const Card: FC<CardProps> = ({ card, size }) => {
-    const {title, text, date, image} = card;
+    const {title, text, date, image, id} = card;
 
     const { theme } = useThemeContext();
 
@@ -27,6 +29,7 @@ const Card: FC<CardProps> = ({ card, size }) => {
 
     const isVisible = useSelector(PostSelectors.getVisibleSelectedModal);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const onClickMore = () => {
         dispatch(setSelectedPost(card))
@@ -39,6 +42,10 @@ const Card: FC<CardProps> = ({ card, size }) => {
 
     const onSaveClick = () => {
         dispatch(setSavedPosts({card}))
+    };
+
+    const onTitleClick = () => {
+        navigate(`/blog/${id}`)
     }
 
     const likedPosts = useSelector(PostSelectors.getLikedPosts);
@@ -71,6 +78,7 @@ const Card: FC<CardProps> = ({ card, size }) => {
                                 [styles.mediumTitle]: isMedium || isSmall,
                                 [styles.darkTitle]: isDark,
                             })}
+                            onClick={ onTitleClick }
                         >
                             {title}
                         </div>
