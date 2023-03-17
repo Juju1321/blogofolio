@@ -7,7 +7,7 @@ import { TabsNames } from "../../components/Tabs/types";
 
 import {useDispatch, useSelector} from "react-redux";
 import {getALLPosts, PostSelectors} from "../../redux/reducers/postSlice";
-import SelectedPostModal from "../SelectedPostModal";
+import SelectedPostModal from "../SelectedpostModal";
 
 
 const TABS_LIST = [
