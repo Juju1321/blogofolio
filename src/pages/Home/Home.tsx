@@ -4,9 +4,10 @@ import Title from "../../components/Title";
 import Tabs from "../../components/Tabs";
 import CardsList from "../../components/CardsList";
 import { TabsNames } from "../../components/Tabs/types";
-import SelectedPostModal from "../SelectedpostModal";
+
 import {useDispatch, useSelector} from "react-redux";
 import {getALLPosts, PostSelectors} from "../../redux/reducers/postSlice";
+import SelectedPostModal from "../SelectedPostModal";
 
 
 const TABS_LIST = [

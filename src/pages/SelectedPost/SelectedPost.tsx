@@ -1,23 +1,30 @@
-import React, { FC } from 'react';
+import React, {useEffect} from 'react';
 import classNames from "classnames";
 
 import Button from "../../components/Button";
 import {BookmarkIcon, DislikeIcon, LikeIcon} from "../../assets/icons";
 import {Theme,  useThemeContext} from "../../context/Theme/Context";
 import styles from "./SelectedPost.module.scss";
-import {ButtonType, CardType} from "../../utils/@globalTypes";
-import {NavLink} from "react-router-dom";
+import {ButtonType} from "../../utils/@globalTypes";
+import {NavLink, useParams} from "react-router-dom";
 import {RoutesList} from "../Router";
+import {useDispatch, useSelector} from "react-redux";
+import {getChosenPost, PostSelectors} from "../../redux/reducers/postSlice";
 
-type SelectedPostProps = {
-    chosenPost: CardType,
-}
-
-const SelectedPost: FC<SelectedPostProps> = ({chosenPost}) => {
+const SelectedPost = () => {
     const { theme } = useThemeContext();
-    const { id, title, image, text } = chosenPost;
+    const { id } = useParams();
 
-    return (
+    const chosenPost = useSelector(PostSelectors.getChosenPost);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (id) {
+            dispatch(getChosenPost(id))
+        }
+    }, []);
+
+    return chosenPost ? (
         <div className={classNames(styles.container, {
             [styles.darkContainer]: theme === Theme.Dark,
         })}
@@ -35,15 +42,15 @@ const SelectedPost: FC<SelectedPostProps> = ({chosenPost}) => {
             <div className={classNames(styles.title, {
                 [styles.darkTitle]: theme === Theme.Dark
             })}>
-                {title}
+                {chosenPost?.title}
             </div>
             <div className={styles.imgTextContainer}>
-                <img className={styles.imgPost} src={image} alt={"post image"}/>
+                <img className={styles.imgPost} src={chosenPost?.image} alt={"post image"}/>
                 <div className={classNames(styles.text, {
                     [styles.darkText]: theme === Theme.Dark
                 })}
                 >
-                    {text}
+                    {chosenPost?.text}
                 </div>
             <div className={styles.buttonContainer}>
                 <div className={styles.leftBtn}>
@@ -63,7 +70,7 @@ const SelectedPost: FC<SelectedPostProps> = ({chosenPost}) => {
             </div>
             </div>
         </div>
-    )
+    ) : null
 }
 
 export default SelectedPost

@@ -14,7 +14,7 @@ function* getALLPostsWorker() {
         console.warn("Error getting all posts", problem)
     }
 }
-function* getChosenPostWorker(action:PayloadAction<any>) {
+function* getChosenPostWorker(action:PayloadAction<string>) {
     const { ok, data, problem }:ApiResponse<CardType> = yield call(API.getSinglePost, action.payload);
     if (ok && data) {
         yield put(setChosenPost(data));

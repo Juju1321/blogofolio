@@ -36,7 +36,7 @@ const postSlice = createSlice( {
         setAllPosts: (state, action: PayloadAction<CardListType>) => {
             state.postsList = action.payload;
         },
-        getChosenPost: (_, __: PayloadAction<any>) => {},
+        getChosenPost: (_, __: PayloadAction<string>) => {},
         setChosenPost: (state, action:PayloadAction<CardType | null>) => {
             state.chosenPost = action.payload
         },
