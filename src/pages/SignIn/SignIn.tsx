@@ -1,13 +1,14 @@
 import React, {useState} from "react";
-import Title from "../../components/Title";
+import classNames from "classnames";
+import {NavLink} from "react-router-dom";
+
 import Input from "../../components/Input";
 import Button from "../../components/Button";
-import styles from "./SignIn.module.scss"
-import classNames from "classnames";
 import {Theme, useThemeContext} from "../../context/Theme/Context";
-import {NavLink} from "react-router-dom";
 import {RoutesList} from "../Router";
 import {ButtonType} from "../../utils/@globalTypes";
+import RegistrationContainer from "../RegistrationContainer";
+import styles from "./SignIn.module.scss"
 
 const SignIn = () => {
     const [email, setEmail] = useState("");
@@ -19,19 +20,7 @@ const SignIn = () => {
     const isDark = theme === Theme.Dark;
 
     return (
-        <div>
-            <div className={styles.titleContainer}>
-                <NavLink to={RoutesList.Home} className={classNames(styles.breadCrumbs, {
-                    [styles.darkBreadCrumbs]: isDark,
-                })}>
-                    Back to home
-                </NavLink>
-                <Title title={"Sign In"}/>
-            </div>
-            <div className={styles.infoContainer}>
-                <div className={classNames(styles.mainBlockContainer , {
-                    [styles.darkMainBlockContainer]: isDark,
-                })}>
+        <RegistrationContainer title={"Sign In"}>
                     <div className={styles.inputContainer}>
                         <Input title={"Email"} placeholder={"Your email"} onChange={onChangeEmail} value={email} type={"text"}/>
                         <Input title={"Password"} placeholder={"Your password"} onChange={onChangePassword} value={password} type={"password"}/>
@@ -50,9 +39,7 @@ const SignIn = () => {
                             <NavLink to={RoutesList.SignUp} className={styles.navButton}>Sign Up</NavLink>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
+        </RegistrationContainer>
     )
 }
 

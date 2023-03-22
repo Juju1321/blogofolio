@@ -5,10 +5,10 @@ import styles from "./SignUp.module.scss";
 import {Theme, useThemeContext} from "../../context/Theme/Context";
 import {NavLink} from "react-router-dom";
 import {RoutesList} from "../Router";
-import Title from "../../components/Title";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import {ButtonType} from "../../utils/@globalTypes";
+import RegistrationContainer from "../RegistrationContainer";
 
 const SignUp = () => {
       const [name, setName] = useState("")
@@ -22,19 +22,7 @@ const SignUp = () => {
     const isDark = theme === Theme.Dark;
 
     return (
-        <div>
-            <div className={styles.titleContainer}>
-                <NavLink to={RoutesList.Home} className={classNames(styles.breadCrumbs, {
-                    [styles.darkBreadCrumbs]: isDark,
-                })}>
-                    Back to home
-                </NavLink>
-                <Title title={"Sign In"}/>
-            </div>
-            <div className={styles.infoContainer}>
-                <div className={classNames(styles.mainBlockContainer , {
-                    [styles.darkMainBlockContainer]: isDark,
-                })}>
+        <RegistrationContainer title={"Sign Up"}>
                     <div className={styles.inputContainer}>
                         <Input title={"Name"} placeholder={"Your name"} onChange={onChangeName} value={name} type={"text"} />
                         <Input title={"Email"} placeholder={"Your email"} onChange={onChangeEmail} value={email} type={"text"}/>
@@ -50,9 +38,7 @@ const SignUp = () => {
                             <NavLink to={RoutesList.SignIn} className={styles.navButton}>Sign In</NavLink>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
+        </RegistrationContainer>
     )
 }
 

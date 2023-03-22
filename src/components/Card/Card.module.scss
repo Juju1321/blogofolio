@@ -20,6 +20,12 @@
 .iconContainer {
   display: flex;
   gap: 24px;
+  div:hover {
+    cursor: pointer;
+    svg > path {
+      fill: $primary-secondary;
+    }
+  }
 }
 
 .infoContainer {
@@ -120,7 +126,6 @@
 }
 
 .likeDislikeIcon {
-  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -132,8 +137,4 @@
   font-size: 16px;
   line-height: 24px;
   color: $secondary;
-}
-
-.moreIcon {
-  cursor: pointer;
 }
