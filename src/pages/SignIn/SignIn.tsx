@@ -25,11 +25,11 @@ const SignIn = () => {
                         <Input title={"Email"} placeholder={"Your email"} onChange={onChangeEmail} value={email} type={"text"}/>
                         <Input title={"Password"} placeholder={"Your password"} onChange={onChangePassword} value={password} type={"password"}/>
                     </div>
-                    <div className={classNames(styles.forgotPass, {
+                    <NavLink to={RoutesList.Reset} className={classNames(styles.forgotPass, {
                         [styles.darkForgotPass]: isDark,
                     })}>
                         Forgot password?
-                    </div>
+                    </NavLink>
                     <div>
                         <Button title={"Sign In"} onClick={()=> {}} type={ButtonType.Primary}/>
                         <div className={classNames(styles.signUp, {
