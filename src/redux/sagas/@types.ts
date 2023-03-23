@@ -1,4 +1,4 @@
-import {CardListType} from "../../utils/@globalTypes";
+import {CardListType} from "/utils/@globalTypes";
 
 
 export type AllPostsResponse = {

@@ -4,7 +4,7 @@ import classNames from "classnames";
 import {useNavigate} from "react-router-dom";
 
 import {CardProps} from "./types";
-import {BookmarkIcon, DislikeIcon, LikeIcon, MoreIcon, SaveBookmarkIcon} from "../../assets/icons";
+import {BookmarkIcon, DislikeIcon, LikeIcon, MoreIcon, SaveBookmarkIcon} from "/assets/icons";
 import {
     LikeStatus,
     PostSelectors,
@@ -12,9 +12,9 @@ import {
     setSavedPosts,
     setSelectedPost,
     setStatus
-} from "../../redux/reducers/postSlice";
-import {Theme, useThemeContext} from "../../context/Theme/Context";
-import {CardSize} from "../../utils/@globalTypes";
+} from "/redux/reducers/postSlice";
+import {Theme, useThemeContext} from "/context/Theme/Context";
+import {CardSize} from "/utils/@globalTypes";
 import styles from "./Card.module.scss";
 
 

@@ -3,7 +3,7 @@ import React, {useEffect, useMemo, useState} from "react";
 import RegistrationContainer from "../RegistrationContainer";
 import styles from "./ResetPassword.module.scss";
 import Button from "../../components/Button";
-import {ButtonType} from "../../utils/@globalTypes";
+import {ButtonType} from "/utils/@globalTypes";
 import Input from "../../components/Input";
 
 const ResetPassword = () => {

@@ -1,10 +1,10 @@
 import React, {FC, ReactNode} from "react";
 import classNames from "classnames";
+import {NavLink} from "react-router-dom";
 
 import styles from "./RegistrationContainer.module.scss";
-import {NavLink} from "react-router-dom";
 import {RoutesList} from "../Router";
-import {Theme, useThemeContext} from "../../context/Theme/Context";
+import {Theme, useThemeContext} from "/context/Theme/Context";
 import Title from "../../components/Title";
 
 type RegistrationContainerProps = {

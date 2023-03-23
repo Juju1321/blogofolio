@@ -1,8 +1,8 @@
 import React from "react";
-
-import { MoonIcon, SunIcon } from "../../assets/icons";
-import { Theme, useThemeContext } from "../../context/Theme/Context";
 import classNames from "classnames";
+
+import { MoonIcon, SunIcon } from "/assets/icons";
+import { Theme, useThemeContext } from "/context/Theme/Context";
 import styles from "./ThemeSwitcher.module.scss"
 
 const ThemeSwitcher = () => {

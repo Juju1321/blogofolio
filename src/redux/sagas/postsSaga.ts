@@ -1,10 +1,11 @@
 import { takeLatest, all, call, put } from "redux-saga/effects";
 import { ApiResponse } from "apisauce";
+import {PayloadAction} from "@reduxjs/toolkit";
+
 import {getALLPosts, getChosenPost, setAllPosts, setChosenPost} from "../reducers/postSlice";
 import API from "../api"
 import {AllPostsResponse} from "./@types";
-import {CardType} from "../../utils/@globalTypes";
-import {PayloadAction} from "@reduxjs/toolkit";
+import {CardType} from "/utils/@globalTypes";
 
 function* getALLPostsWorker() {
     const { ok, data, problem }:ApiResponse<AllPostsResponse> = yield call(API.getPosts);

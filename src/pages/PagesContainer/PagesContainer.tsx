@@ -1,9 +1,9 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
+import classNames from "classnames";
 
 import styles from "./PagesContainer.module.scss"
-import {Theme, useThemeContext} from "../../context/Theme/Context";
-import classNames from "classnames";
+import {Theme, useThemeContext} from "/context/Theme/Context";
 import Header from "./Header";
 
 const PagesContainer = () => {

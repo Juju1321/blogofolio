@@ -4,9 +4,9 @@ import {NavLink} from "react-router-dom";
 
 import Input from "../../components/Input";
 import Button from "../../components/Button";
-import {Theme, useThemeContext} from "../../context/Theme/Context";
+import {Theme, useThemeContext} from "/context/Theme/Context";
 import {RoutesList} from "../Router";
-import {ButtonType} from "../../utils/@globalTypes";
+import {ButtonType} from "/utils/@globalTypes";
 import RegistrationContainer from "../RegistrationContainer";
 import styles from "./SignIn.module.scss"
 

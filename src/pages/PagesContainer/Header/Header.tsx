@@ -1,15 +1,15 @@
 import React, {useMemo, useState} from "react";
-import BurgerButton from "../../../components/BurgerButton";
+import classNames from "classnames";
+import {NavLink, useLocation, useNavigate} from "react-router-dom";
 
+import BurgerButton from "../../../components/BurgerButton";
 import styles from "./Header.module.scss";
 import User from "../../../components/User";
 import ThemeSwitcher from "../../../components/ThemeSwitcher";
 import Button from "../../../components/Button";
-import {NavLink, useLocation, useNavigate} from "react-router-dom";
 import {RoutesList} from "../../Router";
-import classNames from "classnames";
-import {UserIcon} from "../../../assets/icons";
-import {ButtonType} from "../../../utils/@globalTypes";
+import {UserIcon} from "/assets/icons";
+import {ButtonType} from "/utils/@globalTypes";
 
 const Header = () => {
     const [isOpened, setOpened] = useState(false)

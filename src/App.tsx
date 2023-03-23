@@ -2,9 +2,9 @@ import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 
 import ThemeProvider from "./context/Theme/Provider";
-import {Theme} from "./context/Theme/Context";
+import {Theme} from "/context/Theme/Context";
 import Router from "./pages/Router";
-import {changeTheme, ThemeSelectors} from "./redux/reducers/themeSlice";
+import {changeTheme, ThemeSelectors} from "/redux/reducers/themeSlice";
 
 
 const App = () => {
