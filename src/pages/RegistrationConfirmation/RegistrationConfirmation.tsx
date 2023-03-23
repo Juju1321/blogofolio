@@ -3,13 +3,13 @@ import {useNavigate, useParams} from "react-router-dom";
 import classNames from "classnames";
 import {useDispatch} from "react-redux";
 
-import Button from "../../components/Button";
+import Button from "src/components/Button";
 import styles from "./RegistrationConfirmation.module.scss";
-import {Theme, useThemeContext} from "/context/Theme/Context";
-import {ButtonType} from "/utils/@globalTypes";
+import {Theme, useThemeContext} from "src/context/Theme/Context";
+import {ButtonType} from "src/utils/@globalTypes";
 import RegistrationContainer from "../RegistrationContainer";
 import {RoutesList} from "../Router";
-import {activateUser} from "/redux/reducers/authSlice";
+import {activateUser} from "src/redux/reducers/authSlice";
 
 
 const RegistrationConfirmation = () => {

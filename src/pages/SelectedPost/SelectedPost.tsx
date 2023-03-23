@@ -3,13 +3,13 @@ import classNames from "classnames";
 import {NavLink, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 
-import Button from "../../components/Button";
-import {BookmarkIcon, DislikeIcon, LikeIcon} from "/assets/icons";
-import {Theme,  useThemeContext} from "/context/Theme/Context";
+import Button from "src/components/Button";
+import {BookmarkIcon, DislikeIcon, LikeIcon} from "src/assets/icons";
+import {Theme,  useThemeContext} from "src/context/Theme/Context";
 import styles from "./SelectedPost.module.scss";
-import {ButtonType} from "/utils/@globalTypes";
+import {ButtonType} from "src/utils/@globalTypes";
 import {RoutesList} from "../Router";
-import {getChosenPost, PostSelectors} from "/redux/reducers/postSlice";
+import {getChosenPost, PostSelectors} from "src/redux/reducers/postSlice";
 
 const SelectedPost = () => {
     const { theme } = useThemeContext();

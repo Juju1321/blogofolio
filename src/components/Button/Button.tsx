@@ -2,7 +2,7 @@ import React, { FC, ReactNode } from "react";
 import classNames from "classnames";
 
 import styles from "./Button.module.scss";
-import {ButtonType} from "/utils/@globalTypes";
+import {ButtonType} from "src/utils/@globalTypes";
 
 type ButtonProps ={
     title: string | ReactNode;

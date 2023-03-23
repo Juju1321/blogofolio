@@ -3,7 +3,7 @@ import classNames from "classnames";
 
 import styles from "./Tabs.module.scss";
 import {TabsNames, TabsProps} from "./types";
-import { Theme, useThemeContext } from "/context/Theme/Context";
+import { Theme, useThemeContext } from "src/context/Theme/Context";
 
 
 const Tabs: FC<TabsProps> = ({ tabsList, activeTab, onClick }) => {

@@ -2,7 +2,7 @@ import React, { FC } from "react";
 
 import Card from "../Card";
 import styles from "./CardsList.module.scss";
-import {CardListType, CardSize} from "/utils/@globalTypes";
+import {CardListType, CardSize} from "src/utils/@globalTypes";
 
 type CardsListProps = {
     cardsList: CardListType,

@@ -1,7 +1,7 @@
 import React, {FC, ReactNode} from "react";
 
 import styles from "./Modal.module.scss";
-import {CloseIconModal} from "/assets/icons/CloseIconModal";
+import {CloseIconModal} from "src/assets/icons/CloseIconModal";
 
 type ModalProps = {
     isVisible: boolean;

@@ -2,9 +2,9 @@ import React, {useEffect, useMemo, useState} from "react";
 
 import RegistrationContainer from "../RegistrationContainer";
 import styles from "./NewPassword.module.scss";
-import Button from "../../components/Button";
-import {ButtonType} from "/utils/@globalTypes";
-import Input from "../../components/Input";
+import Button from "src/components/Button";
+import {ButtonType} from "src/utils/@globalTypes";
+import Input from "src/components/Input";
 
 const NewPassword = () => {
     const [password, setPassword] = useState("");

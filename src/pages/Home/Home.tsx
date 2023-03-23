@@ -4,8 +4,8 @@ import {useDispatch, useSelector} from "react-redux";
 import Title from "../../components/Title";
 import Tabs from "../../components/Tabs";
 import CardsList from "../../components/CardsList";
-import { TabsNames } from "/components/Tabs/types";
-import {getALLPosts, PostSelectors} from "/redux/reducers/postSlice";
+import { TabsNames } from "src/components/Tabs/types";
+import {getALLPosts, PostSelectors} from "src/redux/reducers/postSlice";
 import SelectedPostModal from "../SelectedpostModal";
 
 

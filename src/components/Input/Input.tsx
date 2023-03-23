@@ -2,7 +2,7 @@ import React, {ChangeEvent, FC} from "react";
 import classNames from "classnames";
 
 import styles from "./Input.module.scss";
-import {Theme, useThemeContext} from "/context/Theme/Context";
+import {Theme, useThemeContext} from "src/context/Theme/Context";
 
 type InputProps = {
     title: string;
