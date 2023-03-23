@@ -72,7 +72,7 @@ const SignUp = () => {
             emailError.length === 0 &&
             passwordError.length === 0
         );
-    }, [nameError]);
+    }, [nameError, emailError, passwordError]);
 
     return (
         <RegistrationContainer title={"Sign Up"}>

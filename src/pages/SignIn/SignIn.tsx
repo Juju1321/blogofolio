@@ -43,7 +43,7 @@ const SignIn = () => {
             emailError.length === 0 &&
             passwordError.length === 0
         );
-    }, [emailError]);
+    }, [emailError, passwordError]);
 
     return (
         <RegistrationContainer title={"Sign In"}>
