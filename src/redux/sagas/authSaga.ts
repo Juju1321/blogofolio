@@ -2,10 +2,18 @@ import { takeLatest, all, call, put } from "redux-saga/effects";
 import { ApiResponse } from "apisauce";
 import {PayloadAction} from "@reduxjs/toolkit";
 
-import {activateUser, signUpUser, signInUser, setLoggedIn, logoutUser} from "../reducers/authSlice";
+import {
+    activateUser,
+    signUpUser,
+    signInUser,
+    setLoggedIn,
+    logoutUser,
+    setUserInfo,
+    getUserInfo
+} from "../reducers/authSlice";
 import {ActivateUserPayload, SignInUserPayload, SignUpUserPayload} from "../reducers/@types";
 import API from "../api";
-import {SignInResponse, SignUpUserResponse} from "./@types";
+import {SignInResponse, SignUpUserResponse, UserInfoResponse} from "./@types";
 import {ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY} from "src/utils/constants";
 
 function* signUpUserWorker(action:PayloadAction<SignUpUserPayload>) {
@@ -47,11 +55,24 @@ function* logoutUserWorker() {
     yield put(setLoggedIn(false));
 }
 
+function* getUserInfoWorker() {
+    const accessToken = localStorage.getItem(ACCESS_TOKEN_KEY);
+    if (accessToken) {
+        const {ok, problem, data}: ApiResponse<UserInfoResponse> = yield call(API.getUserInfo, accessToken);
+        if (ok && data) {
+            yield put(setUserInfo(data));
+        } else {
+            console.warn("Error user info", problem)
+        }
+    }
+}
+
 export default function* authSaga() {
     yield all([
         takeLatest(signUpUser, signUpUserWorker),
         takeLatest(activateUser, activateUserWorker),
         takeLatest(signInUser, signInUserWorker),
         takeLatest(logoutUser, logoutUserWorker),
+        takeLatest(getUserInfo, getUserInfoWorker),
     ]);
 }

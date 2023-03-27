@@ -1,4 +1,4 @@
-import React, {useMemo, useState} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import classNames from "classnames";
 import {NavLink, useLocation, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
@@ -18,11 +18,14 @@ const Header = () => {
 
     const navigate = useNavigate();
     const location = useLocation();
-    const isLoggedIn = useSelector(AuthSelectors.getLoggedIn);
     const dispatch = useDispatch();
 
-    const onBurgerClick = () => setOpened(!isOpened);
+    const isLoggedIn = useSelector(AuthSelectors.getLoggedIn);
+    const userInfo = useSelector(AuthSelectors.getUserInfo);
 
+    const userName = userInfo?.username;
+
+    const onBurgerClick = () => setOpened(!isOpened);
     const onAuthButtonClick = () => {
         navigate(RoutesList.SignIn)
     };
@@ -50,7 +53,7 @@ const Header = () => {
             <div className={styles.container}>
                 <BurgerButton isOpened={isOpened} onBurgerClick={onBurgerClick}/>
                 {isLoggedIn ?
-                    <User userName={"Artem Malkin"}/>
+                    <User userName={userName}/>
                     :
                     <Button
                         title={<UserIcon/>}
@@ -61,7 +64,7 @@ const Header = () => {
             </div>
             {isOpened && <div className={styles.menuContainer}>
                 <div className={styles.actionsContainer}>
-                    {isLoggedIn && <User userName={"Artem Malkin"}/>}
+                    {isLoggedIn && <User userName={userName}/>}
                     {navButtonList.map(({title, key}) => {
                         return (
                         <NavLink to={key} key={key} className={classNames(styles.navButton, {
