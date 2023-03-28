@@ -61,9 +61,6 @@ function* getUserInfoWorker() {
         const {ok, problem, data}: ApiResponse<UserInfoResponse> = yield call(API.getUserInfo, accessToken);
         if (ok && data) {
             yield put(setUserInfo(data));
-        } else if (problem === 'SERVER_ERROR')  {
-            console.warn("Server Error", problem);
-            localStorage.removeItem(ACCESS_TOKEN_KEY);
         } else {
             console.warn("Error user info", problem);
         }
