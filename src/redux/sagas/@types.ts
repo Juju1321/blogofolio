@@ -23,4 +23,4 @@ export type UserInfoResponse = {
     username: string,
     id: number,
     email: string,
-}
+};
