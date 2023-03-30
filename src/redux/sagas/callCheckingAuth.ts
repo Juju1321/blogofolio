@@ -19,17 +19,14 @@ function* callCheckingAuth(apiCall: any, ...params: any) {
                 API.verifyToken,
                 accessToken
             );
-            //Если accessResponse === 401 - access помер
             if (accessResponse.status === 401) {
                 const refreshResponse: ApiResponse<any> = yield call(
                     API.verifyToken,
                     refreshToken
                 );
-                //Если refreshResponse === 401 - refresh помер
                 if (refreshResponse.status === 401) {
                     yield put(logoutUser());
                 } else {
-                    //если refresh - жив, получаем вместе с ним новый accessToken
                     const {
                         ok: accessNewOk,
                         data: accessNewData,
@@ -37,7 +34,6 @@ function* callCheckingAuth(apiCall: any, ...params: any) {
                         API.refreshToken,
                         refreshToken
                     );
-                    //если с новым токеном все хорошо - делаем повторно запрос на сервер и кладем его в localStorage
                     if (accessNewOk && accessNewData) {
                         localStorage.setItem(ACCESS_TOKEN_KEY, accessNewData.access);
                         const newResponse: ApiResponse<any> = yield call(
@@ -52,8 +48,6 @@ function* callCheckingAuth(apiCall: any, ...params: any) {
                 }
             }
         } else {
-            //Если это не ошибка токена - значит это мы что-то не так сделали с запросом
-            //все хорошо
             return response;
         }
     } else {
