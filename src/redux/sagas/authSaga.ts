@@ -54,6 +54,7 @@ function* logoutUserWorker() {
     localStorage.removeItem(ACCESS_TOKEN_KEY);
     localStorage.removeItem(REFRESH_TOKEN_KEY);
     yield put(setLoggedIn(false));
+    yield put(setUserInfo(null));
 }
 
 function* getUserInfoWorker() {

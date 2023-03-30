@@ -13,6 +13,7 @@ import SelectedPost from "./SelectedPost";
 import ResetPassword from "./ResetPassword";
 import NewPassword from "./NewPassword";
 import {AuthSelectors, getUserInfo} from "src/redux/reducers/authSlice";
+import {getMyPosts} from "src/redux/reducers/postSlice";
 
 
 export enum RoutesList {
@@ -34,7 +35,10 @@ const Router = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if (isLoggedIn) dispatch(getUserInfo())
+        if (isLoggedIn) {
+            dispatch(getUserInfo());
+            dispatch(getMyPosts())
+        }
     }, [isLoggedIn])
 
     return (
