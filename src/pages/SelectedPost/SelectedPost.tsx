@@ -4,8 +4,7 @@ import Title from "../../components/Title";
 import Button, {ButtonType} from "../../components/Button";
 import {BookmarkIcon, DislikeIcon, LikeIcon} from "../../assets/icons";
 
-import styles from "./SelectedPost.module.scss"
-import ThemeSwitcher from "../../components/ThemeSwitcher";
+import styles from "./SelectedPost.module.scss";
 import classNames from "classnames";
 import {Theme,  useThemeContext} from "../../context/Theme/Context";
 
@@ -56,7 +55,6 @@ const SelectedPost = () => {
                     type={ButtonType.Secondary}/>
             </div>
             </div>
-            <ThemeSwitcher />
         </div>
     )
 }

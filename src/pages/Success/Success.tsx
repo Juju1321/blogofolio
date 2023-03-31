@@ -5,22 +5,21 @@ import classNames from "classnames";
 import {Theme, useThemeContext} from "../../context/Theme/Context";
 import Title from "../../components/Title";
 import Button, {ButtonType} from "../../components/Button";
+import {NavLink} from "react-router-dom";
+import {RoutesList} from "../Router";
 
 const Success = () => {
     const { theme } = useThemeContext()
     const isDark = theme === Theme.Dark;
 
     return (
-        <div className={classNames(styles.container, {
-            [styles.darkContainer]: isDark,
-        })}
-        >
+        <div>
             <div className={styles.titleContainer}>
-                <div className={classNames(styles.breadCrumbs, {
+                <NavLink to={RoutesList.Home} className={classNames(styles.breadCrumbs, {
                     [styles.darkBreadCrumbs]: isDark,
                 })}>
                     Back to home
-                </div>
+                </NavLink>
                 <Title title={"Success"}/>
             </div>
             <div className={styles.infoContainer}>

@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from "react";
-import classNames from "classnames";
-import styles from "./Home.module.scss";
 
 import Title from "../../components/Title";
 import Tabs from "../../components/Tabs";
 import CardsList from "../../components/CardsList";
 import { CardType } from "../../components/Card";
 import { TabsNames } from "../../components/Tabs/types";
-import { Theme, useThemeContext } from "../../context/Theme/Context";
-import ThemeSwitcher from "../../components/ThemeSwitcher";
 
 const MOCK_ARRAY = [
     {
@@ -152,7 +148,7 @@ const TABS_LIST = [
 ]
 
 const Home = () => {
-    const { theme } = useThemeContext();
+
 
     const [cardsList, setCardsList] = useState<CardType[]>([])
     useEffect(() => {
@@ -163,15 +159,10 @@ const Home = () => {
     const onClick = (key: TabsNames) => setActiveTab(key);
 
     return (
-        <div
-            className={classNames(styles.container, {
-                [styles.darkContainer]: theme === Theme.Dark,
-            })}
-        >
+        <div>
             <Title title={"Blog"} />
             <Tabs tabsList={TABS_LIST} activeTab={activeTab} onClick={onClick}/>
             <CardsList cardsList={MOCK_ARRAY}/>
-            <ThemeSwitcher />
         </div>
     )
 }

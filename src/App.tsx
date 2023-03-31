@@ -1,13 +1,8 @@
-import Home from "./pages/Home";
-import SelectedPost from "./pages/SelectedPost";
 import React, {useState} from "react";
 
 import ThemeProvider from "./context/Theme/Provider";
 import {Theme} from "./context/Theme/Context";
-import SignIn from "./pages/SignIn";
-import Success from "./pages/Success";
-
-
+import Router from "./pages/Router";
 
 
 const App = () => {
@@ -23,10 +18,7 @@ const App = () => {
   return (
       <ThemeProvider theme={theme} onChangeTheme={onChangeTheme}>
           <div>
-              {/*<Home />*/}
-              {/*<SelectedPost />*/}
-              <SignIn />
-              <Success/>
+              <Router/>
           </div>
       </ThemeProvider>
   );

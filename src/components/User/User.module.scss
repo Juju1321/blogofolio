@@ -3,11 +3,12 @@
 
 
 .userBlock {
+  height: 83px;
   background-color: $primary;
   display: flex;
-  flex-direction: row;
+  align-items: center;
   gap: 16px;
-  padding: 17px 0px 19px 30px;
+  padding-left: 32px;
 }
 
 .userAbbreviation {
@@ -20,4 +21,5 @@
 
 .userName {
   @include user();
+  padding-right: 30px;
 }

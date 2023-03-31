@@ -1,0 +1,52 @@
+@import "src/assets/colors";
+
+.container {
+  height: 84px;
+  display: flex;
+  justify-content: space-between;
+  background-color: $primary;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.menuContainer {
+  position: absolute;
+  top: 84px;
+  left: 0;
+  background-color: $white;
+  width: 236px;
+  height: calc(100% - 84px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.authButton {
+  height: 84px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.actionsContainer {
+  display: flex;
+  flex-direction: column;
+}
+.navButton {
+  border-bottom: 1px solid $light;
+  height: 84px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: $secondary;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  &:hover {
+    color: $primary;
+    cursor: pointer;
+  }
+}
+.activeNavButton {
+  color: $primary;
+}

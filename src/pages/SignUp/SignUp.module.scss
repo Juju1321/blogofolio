@@ -32,14 +32,15 @@
   gap: 10px;
   margin-bottom: 152px;
 }
- .darkMainBlockContainer {
-   border: 1px solid $gray;
- }
+.darkMainBlockContainer {
+  border: 1px solid $gray;
+}
 
 .inputContainer {
   display: flex;
   flex-direction: column;
   gap: 40px;
+  margin-bottom: 48px;
 }
 
 .forgotPass {
@@ -77,6 +78,3 @@
   display: flex;
   justify-content: center;
 }
-
-
-
