@@ -5,6 +5,7 @@ import Tabs from "../../components/Tabs";
 import CardsList from "../../components/CardsList";
 import { CardType } from "../../components/Card";
 import { TabsNames } from "../../components/Tabs/types";
+import SelectedPostModal from "../SelectedpostModal";
 
 const MOCK_ARRAY = [
     {
@@ -148,14 +149,13 @@ const TABS_LIST = [
 ]
 
 const Home = () => {
+    const [cardsList, setCardsList] = useState<CardType[]>([]);
+    const [activeTab, setActiveTab] = useState(TabsNames.All);
 
-
-    const [cardsList, setCardsList] = useState<CardType[]>([])
     useEffect(() => {
         setCardsList(MOCK_ARRAY)
-    }, [MOCK_ARRAY])
+    }, [MOCK_ARRAY]);
 
-    const [activeTab, setActiveTab] = useState(TabsNames.All);
     const onClick = (key: TabsNames) => setActiveTab(key);
 
     return (
@@ -163,6 +163,7 @@ const Home = () => {
             <Title title={"Blog"} />
             <Tabs tabsList={TABS_LIST} activeTab={activeTab} onClick={onClick}/>
             <CardsList cardsList={MOCK_ARRAY}/>
+            <SelectedPostModal/>
         </div>
     )
 }

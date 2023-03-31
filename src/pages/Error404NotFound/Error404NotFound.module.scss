@@ -1,0 +1,42 @@
+@import "src/assets/colors";
+@import "src/assets/mixins";
+
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.error {
+  color: $secondary;
+  font-weight: 800;
+  font-size: 275px;
+  line-height: 236px;
+}
+
+.darkError {
+  color: $error;
+}
+
+.text {
+  color: $secondary;
+  font-weight: 800;
+  font-size: 100px;
+  line-height: 184px;
+}
+
+.darkText {
+  color: $white;
+}
+
+.btnHome {
+  @include button();
+  text-decoration: none;
+  background-color: $primary;
+  color: $white;
+  width: 250px;
+  margin-bottom: 20px;
+ &:hover {
+   background-color: $primary-secondary;
+ }
+}

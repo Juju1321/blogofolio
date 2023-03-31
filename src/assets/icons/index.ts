@@ -6,3 +6,4 @@ export { LikeIcon } from "./LikeIcon";
 export { DislikeIcon } from "./DislikeIcon";
 export { SunIcon } from "./SunIcon";
 export { MoonIcon } from "./MoonIcon";
+export { UserIcon } from "./UserIcon"

@@ -1,10 +1,11 @@
 import React, { FC } from 'react';
+import {useDispatch, useSelector} from "react-redux";
+import {PostSelectors, setPostVisibility, setSelectedPost} from "../../redux/reducers/postSlice";
 import classNames from "classnames";
 
 import { CardProps, CardSize } from "./types";
 import { LikeIcon, DislikeIcon, BookmarkIcon, MoreIcon  } from "../../assets/icons";
 import { Theme, useThemeContext } from "../../context/Theme/Context";
-
 import styles from "./Card.module.scss"
 
 const Card: FC<CardProps> = ({ card, size }) => {
@@ -15,6 +16,14 @@ const Card: FC<CardProps> = ({ card, size }) => {
     const isMedium = size === CardSize.Medium;
     const isSmall = size === CardSize.Small;
     const isDark = theme === Theme.Dark;
+
+    const isVisible = useSelector(PostSelectors.getVisibleSelectedModal);
+    const dispatch = useDispatch();
+
+    const onClickMore = () => {
+        dispatch(setSelectedPost(card))
+        dispatch(setPostVisibility(true))
+    }
 
     return (
         <div
@@ -45,6 +54,7 @@ const Card: FC<CardProps> = ({ card, size }) => {
                     {size === CardSize.Large && <div className={styles.text}>{text}</div>}
                 </div>
                 <img
+                    alt={"image"}
                     src={image}
                     className={classNames(styles.image, {
                         [styles.mediumImage]: isMedium,
@@ -73,13 +83,15 @@ const Card: FC<CardProps> = ({ card, size }) => {
                     <div>
                         <BookmarkIcon />
                     </div>
-                    <div>
-                        <MoreIcon />
-                    </div>
+                    {!isVisible && (
+                        <div onClick={ onClickMore }>
+                            <MoreIcon />
+                        </div>
+                    )}
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Card
+export default Card;
