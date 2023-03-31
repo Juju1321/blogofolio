@@ -1,12 +1,20 @@
-import React, { FC } from 'react';
+import React, {FC} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {PostSelectors, setPostVisibility, setSelectedPost} from "../../redux/reducers/postSlice";
 import classNames from "classnames";
 
-import { CardProps, CardSize } from "./types";
-import { LikeIcon, DislikeIcon, BookmarkIcon, MoreIcon  } from "../../assets/icons";
-import { Theme, useThemeContext } from "../../context/Theme/Context";
-import styles from "./Card.module.scss"
+import {CardProps, CardSize} from "./types";
+import {BookmarkIcon, DislikeIcon, LikeIcon, MoreIcon, SaveBookmarkIcon} from "../../assets/icons";
+import {
+    LikeStatus,
+    PostSelectors,
+    setPostVisibility,
+    setSavedPosts,
+    setSelectedPost,
+    setStatus
+} from "../../redux/reducers/postSlice";
+import {Theme, useThemeContext} from "../../context/Theme/Context";
+import styles from "./Card.module.scss";
+
 
 const Card: FC<CardProps> = ({ card, size }) => {
     const {title, text, date, image} = card;
@@ -23,7 +31,23 @@ const Card: FC<CardProps> = ({ card, size }) => {
     const onClickMore = () => {
         dispatch(setSelectedPost(card))
         dispatch(setPostVisibility(true))
+    };
+
+    const onStatusClick = (status: LikeStatus) => () => {
+        dispatch(setStatus({status, card}))
+    };
+
+    const onSaveClick = () => {
+        dispatch(setSavedPosts({card}))
     }
+
+    const likedPosts = useSelector(PostSelectors.getLikedPosts);
+    const dislikedPosts = useSelector(PostSelectors.getDislikedPosts);
+    const savedPosts = useSelector(PostSelectors.getSavedPosts);
+
+    const likedIndex = likedPosts.findIndex(post => post.id === card.id);
+    const dislikedIndex = dislikedPosts.findIndex(post => post.id === card.id);
+    const savedIndex = savedPosts.findIndex(post => post.id === card.id);
 
     return (
         <div
@@ -68,11 +92,17 @@ const Card: FC<CardProps> = ({ card, size }) => {
                         [styles.darkIconContainer]: isDark,
                     })}
                 >
-                    <div>
+                    <div onClick={onStatusClick(LikeStatus.Like)} className={styles.likeDislikeIcon}>
                         <LikeIcon />
+                        <div className={styles.likeNumber}>
+                            {likedIndex > -1 && 1}
+                        </div>
                     </div>
-                    <div>
+                    <div onClick={onStatusClick(LikeStatus.Dislike)} className={styles.likeDislikeIcon}>
                         <DislikeIcon />
+                        <div className={styles.likeNumber}>
+                            {dislikedIndex > -1 && 1}
+                        </div>
                     </div>
                 </div>
                 <div
@@ -80,11 +110,11 @@ const Card: FC<CardProps> = ({ card, size }) => {
                         [styles.darkIconContainer]: isDark,
                     })}
                 >
-                    <div>
-                        <BookmarkIcon />
+                    <div onClick={ onSaveClick } className={styles.moreIcon}>
+                        { savedIndex === -1 ? <BookmarkIcon /> : <SaveBookmarkIcon /> }
                     </div>
                     {!isVisible && (
-                        <div onClick={ onClickMore }>
+                        <div onClick={ onClickMore } className={styles.moreIcon}>
                             <MoreIcon />
                         </div>
                     )}

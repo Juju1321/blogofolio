@@ -6,4 +6,5 @@ export { LikeIcon } from "./LikeIcon";
 export { DislikeIcon } from "./DislikeIcon";
 export { SunIcon } from "./SunIcon";
 export { MoonIcon } from "./MoonIcon";
-export { UserIcon } from "./UserIcon"
+export { UserIcon } from "./UserIcon";
+export { SaveBookmarkIcon } from "./SaveBookmarkIcon";
