@@ -1,35 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 
 import Title from "../../components/Title";
 import Tabs from "../../components/Tabs";
 import CardsList from "../../components/CardsList";
-import { TabsNames } from "src/components/Tabs/types";
+import {TabsNames} from "src/components/Tabs/types";
 import {getALLPosts, PostSelectors} from "src/redux/reducers/postSlice";
 import SelectedPostModal from "../SelectedpostModal";
 
-
-const TABS_LIST = [
-    {
-        title: 'All',
-        disabled: false,
-        key: TabsNames.All,
-    },
-    {
-        title: 'My favorites',
-        disabled: false,
-        key: TabsNames.Favorites,
-    },
-    {
-        title: 'Popular',
-        disabled: false,
-        key: TabsNames.Popular,
-    },
-]
-
 const Home = () => {
     const dispatch = useDispatch();
-    const postsList = useSelector(PostSelectors.getALLPosts)
+    const postsList = useSelector(PostSelectors.getALLPosts);
+    const favouriteList = useSelector(PostSelectors.getLikedPosts);
+    const myPostsList = useSelector(PostSelectors.getMyPosts);
+    const savedList = useSelector(PostSelectors.getSavedPosts)
     const [activeTab, setActiveTab] = useState(TabsNames.All);
 
     useEffect(() => {
@@ -38,11 +22,25 @@ const Home = () => {
 
     const onClick = (key: TabsNames) => setActiveTab(key);
 
+    const getCurrentList = () => {
+        switch (activeTab) {
+            case TabsNames.Popular:
+                return favouriteList;
+            case TabsNames.MyPosts:
+                return myPostsList;
+            case TabsNames.Favourites:
+                return savedList;
+            case TabsNames.All:
+            default:
+                return postsList;
+        }
+    }
+
     return (
         <div>
             <Title title={"Blog"} />
-            <Tabs tabsList={TABS_LIST} activeTab={activeTab} onClick={onClick}/>
-            <CardsList cardsList={postsList}/>
+            <Tabs activeTab={activeTab} onClick={onClick}/>
+            <CardsList cardsList={getCurrentList()}/>
             <SelectedPostModal/>
         </div>
     )

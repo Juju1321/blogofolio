@@ -22,11 +22,21 @@
   gap: 45px;
 }
 
+.darkMainContent {
+  background-color: $secondary;
+}
+
 .closeButton{
   display: flex;
   justify-content: end;
   margin-right: 21px;
   cursor: pointer;
+}
+
+.darkCloseButton {
+  svg > path {
+    fill: $white;
+  }
 }
 
 .infoContainer{

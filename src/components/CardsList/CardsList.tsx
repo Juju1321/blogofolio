@@ -1,8 +1,9 @@
 import React, { FC } from "react";
 
 import Card from "../Card";
-import styles from "./CardsList.module.scss";
 import {CardListType, CardSize} from "src/utils/@globalTypes";
+import EmptyState from "src/components/EmptyState";
+import styles from "./CardsList.module.scss";
 
 type CardsListProps = {
     cardsList: CardListType,
@@ -29,7 +30,12 @@ const CardsList: FC<CardsListProps> = ( { cardsList } ) => {
                 })}
             </div>
         </div>
-    ) : null
+    ) : (
+        <EmptyState
+            title="Sorry, there's no posts"
+            description="Try to check out another category"
+        />
+    );
 }
 
 export default CardsList

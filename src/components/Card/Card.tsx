@@ -102,13 +102,17 @@ const Card: FC<CardProps> = ({ card, size }) => {
                 >
                     <div onClick={onStatusClick(LikeStatus.Like)} className={styles.likeDislikeIcon}>
                         <LikeIcon />
-                        <div className={styles.likeNumber}>
+                        <div className={classNames(styles.likeNumber, {
+                            [styles.darkLikeNumber]: isDark,
+                        })}>
                             {likedIndex > -1 && 1}
                         </div>
                     </div>
                     <div onClick={onStatusClick(LikeStatus.Dislike)} className={styles.likeDislikeIcon}>
                         <DislikeIcon />
-                        <div className={styles.likeNumber}>
+                        <div className={classNames(styles.likeNumber, {
+                            [styles.darkLikeNumber]: isDark,
+                        })}>
                             {dislikedIndex > -1 && 1}
                         </div>
                     </div>

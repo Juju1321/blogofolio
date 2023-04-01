@@ -6,12 +6,12 @@ export type TabsType = {
 
 export enum TabsNames {
     All,
-    Favorites,
+    MyPosts,
     Popular,
+    Favourites
 }
 
 export type TabsProps = {
-    tabsList: TabsType[],
     activeTab: number,
     onClick: (key: TabsNames) => void
 }
