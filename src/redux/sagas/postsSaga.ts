@@ -14,11 +14,13 @@ import API from "../api"
 import {AllPostsResponse} from "./@types";
 import {CardType} from "src/utils/@globalTypes";
 import callCheckingAuth from "src/redux/sagas/callCheckingAuth";
+import {GetAllPostsPayload} from "src/redux/reducers/@types";
 
-function* getALLPostsWorker() {
-    const { ok, data, problem }:ApiResponse<AllPostsResponse> = yield call(API.getPosts);
+function* getALLPostsWorker(action: PayloadAction<GetAllPostsPayload>) {
+    const { offset } = action.payload
+    const { ok, data, problem }:ApiResponse<AllPostsResponse> = yield call(API.getPosts, offset);
     if (ok && data) {
-        yield put(setAllPosts(data.results));
+        yield put(setAllPosts({cardList: data.results, postsCount: data.count}));
     } else {
         console.warn("Error getting all posts", problem)
     }
@@ -42,7 +44,7 @@ function* getMyPostsWorker() {
 }
 
 function* getSearchedPostsWorker(action: PayloadAction<string>) {
-    const { ok, data, problem }:ApiResponse<AllPostsResponse> = yield call(API.getPosts, action.payload);
+    const { ok, data, problem }:ApiResponse<AllPostsResponse> = yield call(API.getPosts, 0, action.payload);
     if (ok && data) {
         yield put(setSearchedPosts(data.results));
     } else {
