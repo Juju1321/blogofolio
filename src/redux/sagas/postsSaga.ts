@@ -5,10 +5,10 @@ import {PayloadAction} from "@reduxjs/toolkit";
 import {
     getALLPosts,
     getChosenPost,
-    getMyPosts,
+    getMyPosts, getSearchedPosts,
     setAllPosts,
     setChosenPost,
-    setMyPosts
+    setMyPosts, setSearchedPosts
 } from "../reducers/postSlice";
 import API from "../api"
 import {AllPostsResponse} from "./@types";
@@ -41,10 +41,20 @@ function* getMyPostsWorker() {
     }
 }
 
+function* getSearchedPostsWorker(action: PayloadAction<string>) {
+    const { ok, data, problem }:ApiResponse<AllPostsResponse> = yield call(API.getPosts, action.payload);
+    if (ok && data) {
+        yield put(setSearchedPosts(data.results));
+    } else {
+        console.warn("Error getting searched posts", problem)
+    }
+}
+
 export default function* postsSaga() {
     yield all([
         takeLatest(getALLPosts, getALLPostsWorker),
         takeLatest(getChosenPost, getChosenPostWorker),
         takeLatest(getMyPosts, getMyPostsWorker),
+        takeLatest(getSearchedPosts, getSearchedPostsWorker),
     ]);
 }

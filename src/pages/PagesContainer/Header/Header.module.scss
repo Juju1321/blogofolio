@@ -10,6 +10,31 @@
   width: 100%;
 }
 
+.infoContainer {
+  display: flex;
+}
+
+.input {
+  height: 84px;
+  background: $primary-secondary !important;
+  color: rgba(255, 255, 255, 0.5) !important;
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+  }
+  &:hover,
+  &:focus,
+  &:active {
+    border: 2px solid transparent !important;
+  }
+}
+
+.closeButton {
+  cursor: pointer;
+  position: absolute;
+  left: 576px;
+  top: 28px;
+}
+
 .menuContainer {
   position: absolute;
   top: 84px;
@@ -55,4 +80,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border-right: 1px solid $primary-secondary;
+  border-left: 1px solid $primary-secondary;
 }

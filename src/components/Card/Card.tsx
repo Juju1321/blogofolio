@@ -25,6 +25,7 @@ const Card: FC<CardProps> = ({ card, size }) => {
 
     const isMedium = size === CardSize.Medium;
     const isSmall = size === CardSize.Small;
+    const isSearch = size === CardSize.Search;
     const isDark = theme === Theme.Dark;
 
     const isVisible = useSelector(PostSelectors.getVisibleSelectedModal);
@@ -61,6 +62,7 @@ const Card: FC<CardProps> = ({ card, size }) => {
             className={classNames(styles.container, {
                 [styles.mediumContainer]: isMedium,
                 [styles.smallContainer]: isSmall,
+                [styles.searchContainer]: isSearch,
                 [styles.darkContainer]: isDark,
             })}
         >
@@ -68,6 +70,7 @@ const Card: FC<CardProps> = ({ card, size }) => {
                 className={classNames(styles.infoContainer, {
                     [styles.mediumInfoContainer]: isMedium,
                     [styles.smallInfoContainer]: isSmall,
+                    [styles.searchInfoContainer]: isSearch,
                 })}
             >
                 <div className={styles.mainInfoContainer}>
@@ -75,7 +78,7 @@ const Card: FC<CardProps> = ({ card, size }) => {
                         <div className={styles.date}>{date}</div>
                         <div
                             className={classNames(styles.title, {
-                                [styles.mediumTitle]: isMedium || isSmall,
+                                [styles.mediumTitle]: isMedium || isSmall || isSearch,
                                 [styles.darkTitle]: isDark,
                             })}
                             onClick={ onTitleClick }
@@ -90,7 +93,7 @@ const Card: FC<CardProps> = ({ card, size }) => {
                     src={image}
                     className={classNames(styles.image, {
                         [styles.mediumImage]: isMedium,
-                        [styles.smallImage]: isSmall,
+                        [styles.smallImage]: isSmall || isSearch,
                     })}
                 />
             </div>

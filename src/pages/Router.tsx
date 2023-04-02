@@ -14,6 +14,7 @@ import ResetPassword from "./ResetPassword";
 import NewPassword from "./NewPassword";
 import {AuthSelectors, getUserInfo} from "src/redux/reducers/authSlice";
 import {getMyPosts} from "src/redux/reducers/postSlice";
+import Search from "src/pages/Search";
 
 
 export enum RoutesList {
@@ -46,6 +47,7 @@ const Router = () => {
             <Routes>
                 <Route path={RoutesList.Home} element={<PagesContainer />}>
                     <Route path={RoutesList.Home} element={<Home />} />
+                    <Route path={RoutesList.Search} element={<Search />} />
                     <Route
                         path={RoutesList.AddPost}
                         element={isLoggedIn ? <Home/> : <Navigate to={RoutesList.SignIn}/>} />

@@ -15,6 +15,7 @@ export enum CardSize {
     Large,
     Medium,
     Small,
+    Search,
 }
 
 export enum ButtonType {

@@ -9,3 +9,4 @@ export { MoonIcon } from "./MoonIcon";
 export { UserIcon } from "./UserIcon";
 export { SaveBookmarkIcon } from "./SaveBookmarkIcon";
 export { NoContentIcon } from "./NoContentIcon";
+export { SearchIcon } from "./SearchIcon";

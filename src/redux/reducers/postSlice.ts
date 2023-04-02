@@ -1,4 +1,4 @@
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {createAction, createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 import {RootState} from "../store";
 import {CardListType, CardType} from "src/utils/@globalTypes";
@@ -17,6 +17,8 @@ type InitialType = {
     postsList: CardListType,
     chosenPost: CardType | null,
     myPosts: CardListType,
+    searchedPosts: CardListType,
+    searchValue: string,
 };
 
 const initialState: InitialType = {
@@ -28,6 +30,8 @@ const initialState: InitialType = {
     postsList: [],
     chosenPost: null,
     myPosts: [],
+    searchedPosts: [],
+    searchValue: '',
 }
 
 const postSlice = createSlice( {
@@ -51,6 +55,12 @@ const postSlice = createSlice( {
         getMyPosts: (_, __: PayloadAction<undefined>) => {},
         setMyPosts: (state, action: PayloadAction<CardListType>) => {
             state.myPosts = action.payload;
+        },
+        getSearchedPosts: (state, action: PayloadAction<string>) => {
+            state.searchValue = action.payload
+        },
+        setSearchedPosts: (state, action: PayloadAction<CardListType>) => {
+            state.searchedPosts = action.payload
         },
         setStatus: (state, action: PayloadAction<{status: LikeStatus, card: CardType}>) => {
             const { status, card } = action.payload;
@@ -98,6 +108,8 @@ export const {
     getChosenPost,
     getMyPosts,
     setMyPosts,
+    getSearchedPosts,
+    setSearchedPosts,
 } = postSlice.actions;
 export default postSlice.reducer;
 
@@ -110,4 +122,6 @@ export const PostSelectors = {
     getALLPosts: (state: RootState) => state.posts.postsList,
     getChosenPost: (state: RootState) => state.posts.chosenPost,
     getMyPosts: (state: RootState) => state.posts.myPosts,
+    getSearchedPosts: (state: RootState) => state.posts.searchedPosts,
+    getSearchValue: (state: RootState) => state.posts.searchValue,
 }
