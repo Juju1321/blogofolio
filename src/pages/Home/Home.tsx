@@ -70,8 +70,8 @@ const Home = () => {
                 <Title title={"Blog"}/>
                 <Tabs activeTab={activeTab} onClick={onClick}/>
                 <div className={styles.orderingButton}>
-                    <Button title={"Title"} onClick={onOrderClick(Order.Title)} type={ButtonType.Secondary} />
-                    <Button title={"Date"} onClick={onOrderClick(Order.Date)} type={ButtonType.Secondary} />
+                    <Button title={"Title"} className={classNames({[styles.activeButton]: ordering === "title"})} onClick={onOrderClick(Order.Title)} type={ButtonType.Secondary} />
+                    <Button title={"Date"} className={classNames({[styles.activeButton]: ordering === "date"})} onClick={onOrderClick(Order.Date)} type={ButtonType.Secondary} />
                 </div>
                 <CardsList cardsList={getCurrentList()}/>
                 {activeTab !== TabsNames.Popular &&
