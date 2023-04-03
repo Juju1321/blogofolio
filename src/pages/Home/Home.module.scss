@@ -60,3 +60,10 @@
     cursor: not-allowed;
   }
 }
+
+.orderingButton {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin: 10px;
+}

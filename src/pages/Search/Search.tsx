@@ -1,7 +1,7 @@
 import React from "react";
-import Title from "src/components/Title";
-import CardsList from "src/components/CardsList";
 import {useSelector} from "react-redux";
+
+import Title from "src/components/Title";
 import {PostSelectors} from "src/redux/reducers/postSlice";
 import SearchCardList from "src/components/SearchCardList";
 

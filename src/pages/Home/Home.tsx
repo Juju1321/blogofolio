@@ -11,7 +11,13 @@ import {getALLPosts, PostSelectors} from "src/redux/reducers/postSlice";
 import SelectedPostModal from "../SelectedpostModal";
 import {PER_PAGE} from "src/utils/constants";
 import styles from "./Home.module.scss";
+import Button from "src/components/Button";
+import {ButtonType} from "src/utils/@globalTypes";
 
+export enum Order {
+    Title = 'title',
+    Date = 'date',
+}
 const Home = () => {
     const dispatch = useDispatch();
     const postsList = useSelector(PostSelectors.getALLPosts);
@@ -24,11 +30,12 @@ const Home = () => {
 
     const [activeTab, setActiveTab] = useState(TabsNames.All);
     const [currentPage, setCurrentPage] = useState(1);
+    const [ordering, setOrdering] = useState("")
 
     useEffect(() => {
         const offset = PER_PAGE * (currentPage - 1);
-        dispatch(getALLPosts({offset}));
-    }, [currentPage]);
+        dispatch(getALLPosts({offset, ordering}));
+    }, [currentPage, ordering]);
 
     const onPageChange = ({selected}: { selected: number }) => {
         setCurrentPage(selected + 1);
@@ -37,6 +44,11 @@ const Home = () => {
         const onClick = (key: TabsNames) => {
             setActiveTab(key);
             setCurrentPage(1);
+        };
+
+        const onOrderClick = (order: Order) => () => {
+            order === ordering ? setOrdering("") : setOrdering(order);
+            setCurrentPage(1)
         };
 
         const getCurrentList = () => {
@@ -57,11 +69,16 @@ const Home = () => {
             <div>
                 <Title title={"Blog"}/>
                 <Tabs activeTab={activeTab} onClick={onClick}/>
+                <div className={styles.orderingButton}>
+                    <Button title={"Title"} onClick={onOrderClick(Order.Title)} type={ButtonType.Secondary} />
+                    <Button title={"Date"} onClick={onOrderClick(Order.Date)} type={ButtonType.Secondary} />
+                </div>
                 <CardsList cardsList={getCurrentList()}/>
                 {activeTab !== TabsNames.Popular &&
                     activeTab !== TabsNames.Favourites && (
                         <ReactPaginate
                             pageCount={pagesCount}
+                            forcePage={currentPage - 1}
                             onPageChange={onPageChange}
                             containerClassName={styles.pagesContainer}
                             pageClassName={styles.pageNumber}

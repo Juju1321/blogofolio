@@ -17,8 +17,8 @@ import callCheckingAuth from "src/redux/sagas/callCheckingAuth";
 import {GetAllPostsPayload} from "src/redux/reducers/@types";
 
 function* getALLPostsWorker(action: PayloadAction<GetAllPostsPayload>) {
-    const { offset } = action.payload
-    const { ok, data, problem }:ApiResponse<AllPostsResponse> = yield call(API.getPosts, offset);
+    const { offset, search, ordering } = action.payload
+    const { ok, data, problem }:ApiResponse<AllPostsResponse> = yield call(API.getPosts, offset, search, ordering);
     if (ok && data) {
         yield put(setAllPosts({cardList: data.results, postsCount: data.count}));
     } else {
