@@ -7,7 +7,7 @@ import {
     getALLPosts,
     getChosenPost,
     getMyPosts, getSearchedPosts,
-    setAllPosts,
+    setAllPosts, setAllPostsLoading,
     setChosenPost,
     setMyPosts, setSearchedPosts
 } from "../reducers/postSlice";
@@ -18,6 +18,7 @@ import callCheckingAuth from "src/redux/sagas/callCheckingAuth";
 import {AddPostPayload, GetAllPostsPayload} from "src/redux/reducers/@types";
 
 function* getALLPostsWorker(action: PayloadAction<GetAllPostsPayload>) {
+    yield put(setAllPostsLoading(true));
     const { offset, search, ordering } = action.payload
     const { ok, data, problem }:ApiResponse<AllPostsResponse> = yield call(API.getPosts, offset, search, ordering);
     if (ok && data) {
@@ -25,14 +26,17 @@ function* getALLPostsWorker(action: PayloadAction<GetAllPostsPayload>) {
     } else {
         console.warn("Error getting all posts", problem)
     }
+    yield put(setAllPostsLoading(false));
 }
 function* getChosenPostWorker(action:PayloadAction<string>) {
+    yield put(setAllPostsLoading(true));
     const { ok, data, problem }:ApiResponse<CardType> = yield call(API.getSinglePost, action.payload);
     if (ok && data) {
         yield put(setChosenPost(data));
     } else {
         console.warn("Error getting one post", problem)
     }
+    yield put(setAllPostsLoading(false));
 }
 
 function* getMyPostsWorker() {
