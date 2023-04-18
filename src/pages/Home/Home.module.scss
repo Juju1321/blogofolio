@@ -20,7 +20,6 @@
   border-radius: 2px;
   color: #53607a;
   outline: none;
-  padding: 4px;
   user-select: none;
   &:hover {
     cursor: pointer;
@@ -30,6 +29,7 @@
 }
 
 .linkPage {
+  padding: 4px;
   outline: none;
   &:focus {
     outline: none;

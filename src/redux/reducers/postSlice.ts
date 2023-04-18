@@ -2,7 +2,7 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 import {RootState} from "../store";
 import {CardListType, CardType} from "src/utils/@globalTypes";
-import {GetAllPostsPayload, SetAllPostsPayload} from "src/redux/reducers/@types";
+import {AddPostPayload, GetAllPostsPayload, SetAllPostsPayload} from "src/redux/reducers/@types";
 
  export enum LikeStatus {
     Like = "like",
@@ -66,6 +66,7 @@ const postSlice = createSlice( {
         setSearchedPosts: (state, action: PayloadAction<CardListType>) => {
             state.searchedPosts = action.payload
         },
+        addNewPost: (_, __: PayloadAction<AddPostPayload>) => {},
         setStatus: (state, action: PayloadAction<{status: LikeStatus, card: CardType}>) => {
             const { status, card } = action.payload;
             const likedIndex = state.likedPosts.findIndex(post => post.id === card.id);
@@ -114,6 +115,7 @@ export const {
     setMyPosts,
     getSearchedPosts,
     setSearchedPosts,
+    addNewPost,
 } = postSlice.actions;
 export default postSlice.reducer;
 

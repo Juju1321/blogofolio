@@ -58,6 +58,16 @@ const getMyPosts = (token: string) => {
         }
     );
 }
+
+const addPost = (token: string, data: any) => {
+    return API.post("/blog/posts/", data, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`,
+        },
+    });
+};
+
 export default {
     getPosts,
     getSinglePost,
@@ -68,4 +78,5 @@ export default {
     verifyToken,
     refreshToken,
     getMyPosts,
+    addPost
 }
