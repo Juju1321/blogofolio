@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/fe-39-course-project/static/css/main.77622a5b.css",
+    "main.js": "/fe-39-course-project/static/js/main.28c5d06e.js",
+    "index.html": "/fe-39-course-project/index.html",
+    "main.77622a5b.css.map": "/fe-39-course-project/static/css/main.77622a5b.css.map",
+    "main.28c5d06e.js.map": "/fe-39-course-project/static/js/main.28c5d06e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.77622a5b.css",
+    "static/js/main.28c5d06e.js"
+  ]
+}
