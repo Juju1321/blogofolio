@@ -22,6 +22,10 @@ const SignUp = () => {
     const [emailError, setEmailError] = useState("");
     const [passwordError, setPasswordError] = useState("");
 
+    const [nameTouched, setNameTouched] = useState(false);
+    const [passwordTouched, setPasswordTouched] = useState(false);
+    const [emailTouched, setEmailTouched] = useState(false);
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { theme } = useThemeContext();
@@ -31,6 +35,9 @@ const SignUp = () => {
     const onChangeEmail = (value: string) => setEmail(value);
     const onChangePassword = (value: string) => setPassword(value);
     const onChangeConfirmPassword = (value: string) => setConfirmPassword(value);
+    const onBlurEmail = () => setEmailTouched(true);
+    const onBlurPassword = () => setPasswordTouched(true);
+    const onBlurName = () => setNameTouched(true);
     const onSignUpClick = () => {
         dispatch(
             signUpUser({
@@ -41,46 +48,58 @@ const SignUp = () => {
     };
 
     useEffect(() => {
-        if (name.length === 0) {
+        if (name.length === 0 && nameTouched) {
             setNameError("Name is required field");
         } else {
             setNameError("");
         }
-    }, [name]);
+    }, [name, nameTouched]);
 
     useEffect(() => {
-        if (email.length === 0) {
+        if (email.length === 0 && emailTouched) {
             setEmailError("Email is required field");
         } else {
             setEmailError("");
         }
-    }, [email]);
+    }, [email, emailTouched]);
 
     useEffect(() => {
-        if (password !== confirmPassword) {
-            setPasswordError("Passwords must match");
-        } else if (password.length === 0 || confirmPassword.length === 0) {
-            setPasswordError("Password is required field");
-        } else {
-            setPasswordError("");
-        }
-    }, [confirmPassword, password]);
+        if (passwordTouched) {
+            if (password !== confirmPassword) {
+              setPasswordError("Passwords must match");
+            } else if (password.length === 0 || confirmPassword.length === 0) {
+              setPasswordError("Password is required field");
+            } else {
+              setPasswordError("");
+            }
+          }
+        }, [confirmPassword, password, passwordTouched]);
 
     const isValid = useMemo(() => {
         return (
             nameError.length === 0 &&
             emailError.length === 0 &&
-            passwordError.length === 0
+            passwordError.length === 0 &&
+            nameTouched &&
+            emailTouched &&
+            passwordTouched
         );
-    }, [nameError, emailError, passwordError]);
+    }, [
+        nameError,
+        emailError,
+        passwordError,
+        nameTouched,
+        emailTouched,
+        passwordTouched,
+    ]);
 
     return (
         <RegistrationContainer title={"Sign Up"}>
                     <div className={styles.inputContainer}>
-                        <Input title={"Name"} placeholder={"Your name"} onChange={onChangeName} value={name} type={"text"} errorText={nameError}/>
-                        <Input title={"Email"} placeholder={"Your email"} onChange={onChangeEmail} value={email} type={"text"} errorText={emailError}/>
-                        <Input title={"Password"} placeholder={"Your password"} onChange={onChangePassword} value={password} type={"password"} errorText={passwordError}/>
-                        <Input title={"Confirm password"} placeholder={"Confirm password"} onChange={onChangeConfirmPassword} value={password} type={"password"} errorText={passwordError}/>
+                        <Input title={"Name"} onBlur={onBlurName} placeholder={"Your name"} onChange={onChangeName} value={name} type={"text"} errorText={nameError}/>
+                        <Input title={"Email"} onBlur={onBlurEmail} placeholder={"Your email"} onChange={onChangeEmail} value={email} type={"text"} errorText={emailError}/>
+                        <Input title={"Password"} onBlur={onBlurPassword} placeholder={"Your password"} onChange={onChangePassword} value={password} type={"password"} errorText={passwordError}/>
+                        <Input title={"Confirm password"} onBlur={onBlurPassword} placeholder={"Confirm password"} onChange={onChangeConfirmPassword} value={password} type={"password"} errorText={passwordError}/>
                     </div>
                     <div>
                         <Button title={"Sign Up"} onClick={onSignUpClick} type={ButtonType.Primary} disabled={!isValid}/>
