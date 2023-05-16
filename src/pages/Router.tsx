@@ -44,7 +44,7 @@ const Router = () => {
     }, [isLoggedIn])
 
     return (
-        <BrowserRouter basename="/fe-39-course-project">
+        <BrowserRouter basename="/blogofolio">
             <Routes>
                 <Route path={RoutesList.Home} element={<PagesContainer />}>
                     <Route path={RoutesList.Home} element={<Home />} />

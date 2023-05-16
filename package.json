@@ -1,8 +1,8 @@
 {
-  "name": "fe-39-course-project",
+  "name": "blogofolio",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://juju1321.github.io/fe-39-course-project/",
+  "homepage": "https://juju1321.github.io/blogofolio/",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.3",
     "@testing-library/jest-dom": "^5.14.1",
