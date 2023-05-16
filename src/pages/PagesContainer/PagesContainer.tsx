@@ -13,7 +13,9 @@ const PagesContainer = () => {
     return (
         <div className={classNames(styles.container, {
             [styles.darkContainer]: isDark
-        })}>
+        })} 
+            id="scrollableDiv"
+        >
             <Header/>
             <div className={styles.mainInfo}>
                 <Outlet/>

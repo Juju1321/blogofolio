@@ -15,7 +15,7 @@ import API from "../api"
 import {AllPostsResponse} from "./@types";
 import {CardType} from "src/utils/@globalTypes";
 import callCheckingAuth from "src/redux/sagas/callCheckingAuth";
-import {AddPostPayload, GetAllPostsPayload} from "src/redux/reducers/@types";
+import {AddPostPayload, GetAllPostsPayload, GetSearchPostsPayload} from "src/redux/reducers/@types";
 
 function* getALLPostsWorker(action: PayloadAction<GetAllPostsPayload>) {
     yield put(setAllPostsLoading(true));
@@ -48,10 +48,21 @@ function* getMyPostsWorker() {
     }
 }
 
-function* getSearchedPostsWorker(action: PayloadAction<string>) {
-    const { ok, data, problem }:ApiResponse<AllPostsResponse> = yield call(API.getPosts, 0, action.payload);
-    if (ok && data) {
-        yield put(setSearchedPosts(data.results));
+function* getSearchedPostsWorker(action: PayloadAction<GetSearchPostsPayload>) {
+    const { searchValue, isOverwrite, offset } = action.payload;
+  const { ok, data, problem }: ApiResponse<AllPostsResponse> = yield call(
+    API.getPosts,
+    offset,
+    searchValue
+  );
+  if (ok && data) {
+    yield put(
+      setSearchedPosts({
+        cardList: data.results,
+        postsCount: data.count,
+        isOverwrite,
+      })
+    );
     } else {
         console.warn("Error getting searched posts", problem)
     }
