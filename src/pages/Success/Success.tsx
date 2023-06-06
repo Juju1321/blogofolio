@@ -4,9 +4,10 @@ import styles from "./Success.module.scss"
 import classNames from "classnames";
 import {Theme, useThemeContext} from "../../context/Theme/Context";
 import Title from "../../components/Title";
-import Button, {ButtonType} from "../../components/Button";
+import Button from "../../components/Button";
 import {NavLink} from "react-router-dom";
 import {RoutesList} from "../Router";
+import {ButtonType} from "../../utils/@globalTypes";
 
 const Success = () => {
     const { theme } = useThemeContext()

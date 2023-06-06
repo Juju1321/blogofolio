@@ -8,6 +8,8 @@ import SignUp from "./SignUp";
 import Success from "./Success";
 import RegistrationConfirmation from "./RegistrationConfirmation";
 import Error404NotFound from "./Error404NotFound";
+import SelectedPost from "./SelectedPost";
+
 
 export enum RoutesList {
     Home = "/",
@@ -31,10 +33,11 @@ const Router = () => {
                     <Route
                         path={RoutesList.AddPost}
                         element={isLoggedIn ? <Home/> : <Navigate to={RoutesList.SignIn}/>} />
+                    <Route path={RoutesList.SinglePost} element={<SelectedPost />} />
                     <Route path={RoutesList.SignIn} element={<SignIn />} />
                     <Route path={RoutesList.SignUp} element={<SignUp />} />
                     <Route path={RoutesList.Success} element={<Success />}/>
-                    <Route path={RoutesList.Confirm} element={<RegistrationConfirmation/>} />
+                    <Route path={RoutesList.Confirm} element={<RegistrationConfirmation />} />
                     <Route path={RoutesList.Default} element={<Error404NotFound />} />
                 </Route>
             </Routes>

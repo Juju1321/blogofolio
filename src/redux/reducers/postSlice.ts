@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 import {RootState} from "../store";
-import { CardType } from "../../components/Card";
+import {CardListType, CardType} from "../../utils/@globalTypes";
 
  export enum LikeStatus {
     Like = "like",
@@ -11,9 +11,11 @@ import { CardType } from "../../components/Card";
 type InitialType = {
     selectedPost: CardType | null,
     isVisibleSelectedModal: boolean,
-    likedPosts: CardType[],
-    dislikedPosts: CardType[],
-    savedPosts: CardType[],
+    likedPosts: CardListType,
+    dislikedPosts: CardListType,
+    savedPosts: CardListType,
+    postsList: CardListType,
+    chosenPost: CardType | null,
 };
 
 const initialState: InitialType = {
@@ -22,12 +24,22 @@ const initialState: InitialType = {
     likedPosts: [],
     dislikedPosts: [],
     savedPosts: [],
+    postsList: [],
+    chosenPost: null,
 }
 
 const postSlice = createSlice( {
     name: "post",
     initialState,
     reducers: {
+        getALLPosts: (_, __: PayloadAction<undefined>) => {},
+        setAllPosts: (state, action: PayloadAction<CardListType>) => {
+            state.postsList = action.payload;
+        },
+        getChosenPost: (_, __: PayloadAction<string>) => {},
+        setChosenPost: (state, action:PayloadAction<CardType | null>) => {
+            state.chosenPost = action.payload
+        },
         setSelectedPost: (state, action: PayloadAction<CardType | null>) => {
             state.selectedPost = action.payload;
         },
@@ -69,7 +81,7 @@ const postSlice = createSlice( {
     },
 });
 
-export const { setSelectedPost, setPostVisibility, setStatus, setSavedPosts } = postSlice.actions;
+export const { setSelectedPost, setPostVisibility, setStatus, setSavedPosts, getALLPosts, setAllPosts, setChosenPost, getChosenPost } = postSlice.actions;
 export default postSlice.reducer;
 
 export const PostSelectors = {
@@ -78,4 +90,6 @@ export const PostSelectors = {
     getLikedPosts: (state: RootState) => state.posts.likedPosts,
     getDislikedPosts: (state: RootState) => state.posts.dislikedPosts,
     getSavedPosts: (state: RootState) => state.posts.savedPosts,
+    getALLPosts: (state: RootState) => state.posts.postsList,
+    getChosenPost: (state: RootState) => state.posts.chosenPost,
 }
