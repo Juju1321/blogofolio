@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo, useState} from "react";
+import React, {useMemo, useState, KeyboardEvent} from "react";
 import classNames from "classnames";
 import {NavLink, useLocation, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
@@ -9,12 +9,16 @@ import User from "../../../components/User";
 import ThemeSwitcher from "../../../components/ThemeSwitcher";
 import Button from "../../../components/Button";
 import {RoutesList} from "../../Router";
-import {UserIcon} from "src/assets/icons";
+import {CloseIcon, SearchIcon, UserIcon} from "src/assets/icons";
 import {ButtonType} from "src/utils/@globalTypes";
 import {AuthSelectors, logoutUser} from "src/redux/reducers/authSlice";
+import Input from "src/components/Input";
+import {getSearchedPosts} from "src/redux/reducers/postSlice";
 
 const Header = () => {
     const [isOpened, setOpened] = useState(false);
+    const [isInputOpened, setInputOpened] = useState(false);
+    const [searchValue, setSearchValue] = useState("");
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -48,19 +52,62 @@ const Header = () => {
         [isLoggedIn]
     );
 
+    const onClickSearchButton = () => {
+        setInputOpened(!isInputOpened);
+        if (isInputOpened) {
+            dispatch(getSearchedPosts(searchValue));
+            navigate(RoutesList.Search);
+        }
+    };
+
+    const onCloseButton = () => {
+        setInputOpened(!isInputOpened);
+    }
+
+    const onKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === "Enter") {
+            onClickSearchButton();
+        }
+    };
+
     return (
         <>
             <div className={styles.container}>
-                <BurgerButton isOpened={isOpened} onBurgerClick={onBurgerClick}/>
+                <div className={styles.infoContainer}>
+                    <BurgerButton isOpened={isOpened} onBurgerClick={onBurgerClick}/>
+                    {isInputOpened &&
+                        <Input
+                            placeholder={"Search..."}
+                            onChange={setSearchValue}
+                            onKeyDown={onKeyDown}
+                            inputClassName={styles.input}
+                            value={searchValue}
+                            type={"text"}
+                        />
+                    }
+                    {isInputOpened &&
+                        <div onClick={onCloseButton} className={styles.closeButton}>
+                            <CloseIcon/>
+                        </div>
+                    }
+                </div>
+                <div className={styles.infoContainer}>
+                <Button
+                    title={<SearchIcon />}
+                    onClick={onClickSearchButton}
+                    type={ButtonType.Primary}
+                    className={styles.userBtn}
+                />
                 {isLoggedIn ?
                     <User userName={userName}/>
                     :
                     <Button
-                        title={<UserIcon/>}
+                        title={<UserIcon />}
                         onClick={onAuthButtonClick}
                         type={ButtonType.Primary}
                         className={styles.userBtn}
                     />}
+                </div>
             </div>
             {isOpened && <div className={styles.menuContainer}>
                 <div className={styles.actionsContainer}>

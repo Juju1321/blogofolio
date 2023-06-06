@@ -1,13 +1,14 @@
 import {create} from "apisauce";
 
 import {ActivateUserData, SignInUserData, UserPayloadData} from "../reducers/@types";
+import {PER_PAGE} from "src/utils/constants";
 
 const API = create({
     baseURL: "https://studapi.teachmeskills.by",
 });
 
-const getPosts = () => {
-    return API.get("/blog/posts/?limit=12");
+const getPosts = (offset: number, search?: string, ordering?: string) => {
+    return API.get("/blog/posts/", { limit: PER_PAGE, offset, search, ordering });
 };
 
 const getSinglePost = (id: string) => {
@@ -57,6 +58,16 @@ const getMyPosts = (token: string) => {
         }
     );
 }
+
+const addPost = (token: string, data: any) => {
+    return API.post("/blog/posts/", data, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`,
+        },
+    });
+};
+
 export default {
     getPosts,
     getSinglePost,
@@ -67,4 +78,5 @@ export default {
     verifyToken,
     refreshToken,
     getMyPosts,
+    addPost
 }

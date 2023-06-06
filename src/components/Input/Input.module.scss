@@ -23,12 +23,13 @@
   border-radius: 2px;
   width: 544px;
   box-sizing: border-box;
-  border: 2px solid $white;
+  border: 2px solid transparent;
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
   padding: 18px 20px;
   color:$gray;
+  &:hover,
   &:focus {
     border: 2px solid $medium;
   }

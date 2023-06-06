@@ -3,22 +3,25 @@ import { ApiResponse } from "apisauce";
 import {PayloadAction} from "@reduxjs/toolkit";
 
 import {
+    addNewPost,
     getALLPosts,
     getChosenPost,
-    getMyPosts,
+    getMyPosts, getSearchedPosts,
     setAllPosts,
     setChosenPost,
-    setMyPosts
+    setMyPosts, setSearchedPosts
 } from "../reducers/postSlice";
 import API from "../api"
 import {AllPostsResponse} from "./@types";
 import {CardType} from "src/utils/@globalTypes";
 import callCheckingAuth from "src/redux/sagas/callCheckingAuth";
+import {AddPostPayload, GetAllPostsPayload} from "src/redux/reducers/@types";
 
-function* getALLPostsWorker() {
-    const { ok, data, problem }:ApiResponse<AllPostsResponse> = yield call(API.getPosts);
+function* getALLPostsWorker(action: PayloadAction<GetAllPostsPayload>) {
+    const { offset, search, ordering } = action.payload
+    const { ok, data, problem }:ApiResponse<AllPostsResponse> = yield call(API.getPosts, offset, search, ordering);
     if (ok && data) {
-        yield put(setAllPosts(data.results));
+        yield put(setAllPosts({cardList: data.results, postsCount: data.count}));
     } else {
         console.warn("Error getting all posts", problem)
     }
@@ -41,10 +44,34 @@ function* getMyPostsWorker() {
     }
 }
 
+function* getSearchedPostsWorker(action: PayloadAction<string>) {
+    const { ok, data, problem }:ApiResponse<AllPostsResponse> = yield call(API.getPosts, 0, action.payload);
+    if (ok && data) {
+        yield put(setSearchedPosts(data.results));
+    } else {
+        console.warn("Error getting searched posts", problem)
+    }
+}
+
+function* addNewPostWorker(action: PayloadAction<AddPostPayload>) {
+    const { data, callback } = action.payload;
+    const { ok, problem }: ApiResponse<undefined> = yield callCheckingAuth(
+        API.addPost,
+        data
+    );
+    if (ok) {
+        callback();
+    } else {
+        console.warn("Error adding post", problem);
+    }
+}
+
 export default function* postsSaga() {
     yield all([
         takeLatest(getALLPosts, getALLPostsWorker),
         takeLatest(getChosenPost, getChosenPostWorker),
         takeLatest(getMyPosts, getMyPostsWorker),
+        takeLatest(getSearchedPosts, getSearchedPostsWorker),
+        takeLatest(addNewPost, addNewPostWorker),
     ]);
 }

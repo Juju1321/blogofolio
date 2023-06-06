@@ -1,20 +1,32 @@
-import React, {ChangeEvent, FC} from "react";
+import React, {ChangeEvent, FC, KeyboardEvent} from "react";
 import classNames from "classnames";
 
 import styles from "./Input.module.scss";
 import {Theme, useThemeContext} from "src/context/Theme/Context";
 
 type InputProps = {
-    title: string;
+    title?: string;
     placeholder: string;
     onChange: (value: string) => void;
+    onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void;
     disabled?: boolean;
     value: string;
     errorText?: string;
-    type: string
+    type: string;
+    inputClassName?: string;
 }
 
-const Input: FC<InputProps> = ({title, placeholder, onChange, disabled, value, errorText,type}) => {
+const Input: FC<InputProps> = ({
+                                   title,
+                                   placeholder,
+                                   onChange,
+                                   onKeyDown,
+                                   disabled,
+                                   value,
+                                   errorText,
+                                   type,
+                                   inputClassName,
+}) => {
 
     const onChangeInputText = (event: ChangeEvent<HTMLInputElement>) => {
         onChange(event.target.value)
@@ -25,17 +37,18 @@ const Input: FC<InputProps> = ({title, placeholder, onChange, disabled, value, e
 
     return (
         <div className={styles.container}>
-            <div className={classNames(styles.title, {
+            {title && <div className={classNames(styles.title, {
                 [styles.darkTitle]: isDark,
-            })}>{title}</div>
+            })}>{title}</div>}
             <input
-                className={classNames(styles.input, {
+                className={classNames(styles.input, inputClassName, {
                     [styles.disableInput]:disabled,
                     [styles.errorInput]: errorText
                 })}
                 placeholder={placeholder}
                 disabled={disabled}
                 onChange={onChangeInputText}
+                onKeyDown={onKeyDown}
                 type={type}
             />
             {errorText && <div className={styles.errorText}>{ errorText }</div>}
