@@ -1,9 +1,11 @@
 import React from "react"
 import classNames from "classnames";
 import {NavLink} from "react-router-dom";
+
 import {RoutesList} from "../Router";
 import styles from "./Error404NotFound.module.scss"
-import {Theme, useThemeContext} from "../../context/Theme/Context";
+import {Theme, useThemeContext} from "src/context/Theme/Context";
+
 const Error404NotFound = () => {
     const { theme } = useThemeContext();
     const isDark = theme === Theme.Dark;

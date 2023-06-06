@@ -1,11 +1,12 @@
 import React, { FC } from "react";
+
 import styles from "./User.module.scss";
 
 type UserProps = {
-    userName: string,
+    userName: string | undefined,
 }
 const User: FC<UserProps> = ({ userName }) => {
-    const firstLetters = userName.split(' ').map(user => user[0].toUpperCase()).join('');
+    const firstLetters = userName?.split('_').map(user => user[0].toUpperCase()).join('');
 
     return (
         <div className={styles.userBlock}>

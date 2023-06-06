@@ -1,10 +1,9 @@
 import React, {FC} from "react";
-import Butt from "../Button";
-import { CloseIcon, OpenedMenu } from "../../assets/icons";
 
+import { CloseIcon, OpenedMenu } from "src/assets/icons";
 import styles from "./BurgerButton.module.scss";
 import Button from "../Button";
-import {ButtonType} from "../../utils/@globalTypes";
+import {ButtonType} from "src/utils/@globalTypes";
 
 type BurgerButtonProps = {
     isOpened: boolean,

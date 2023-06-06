@@ -1,12 +1,12 @@
 import React from "react";
+import classNames from "classnames";
+import {useNavigate} from "react-router-dom";
 
 import styles from "./Success.module.scss"
-import classNames from "classnames";
-import {Theme, useThemeContext} from "../../context/Theme/Context";
-import Button from "../../components/Button";
-import {ButtonType} from "../../utils/@globalTypes";
+import {Theme, useThemeContext} from "src/context/Theme/Context";
+import Button from "src/components/Button";
+import {ButtonType} from "src/utils/@globalTypes";
 import RegistrationContainer from "../RegistrationContainer";
-import {useNavigate} from "react-router-dom";
 import {RoutesList} from "../Router";
 
 const Success = () => {
