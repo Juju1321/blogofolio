@@ -1,0 +1,41 @@
+@import "src/assets/colors";
+
+.breadCrumbs {
+  cursor: pointer;
+  text-decoration: none;
+  color: $secondary;
+  &:active {
+    color: $primary;
+  }
+}
+
+.darkBreadCrumbs {
+  color: $white;
+}
+
+.titleContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+  margin-bottom: 72px;
+}
+
+.mainBlockContainer {
+  border: 1px solid $medium;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 40px;
+  gap: 10px;
+  margin-bottom: 152px;
+}
+.darkMainBlockContainer {
+  border: 1px solid $gray;
+}
+
+.infoContainer {
+  display: flex;
+  justify-content: center;
+}

@@ -1,41 +1,5 @@
 @import "src/assets/colors";
 
-.breadCrumbs {
-  cursor: pointer;
-  text-decoration: none;
-  color: $secondary;
-  &:active {
-    color: $primary;
-  }
-}
-
-.darkBreadCrumbs {
-  color: $white;
-}
-
-.titleContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 32px;
-  margin-bottom: 72px;
-}
-
-.mainBlockContainer {
-  border: 1px solid $medium;
-  box-sizing: border-box;
-  max-width: 624px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 40px;
-  gap: 10px;
-  margin-bottom: 152px;
-}
- .darkMainBlockContainer {
-   border: 1px solid $gray;
- }
-
 .inputContainer {
   display: flex;
   flex-direction: column;
@@ -49,6 +13,10 @@
   color: $secondary;
   margin-bottom: 38px;
   cursor: pointer;
+  text-decoration: none;
+  &:hover {
+    color: $primary;
+  }
 }
 
 .darkForgotPass {
@@ -73,10 +41,7 @@
   }
 }
 
-.infoContainer {
-  display: flex;
-  justify-content: center;
-}
+
 
 
 

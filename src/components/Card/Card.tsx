@@ -118,11 +118,11 @@ const Card: FC<CardProps> = ({ card, size }) => {
                         [styles.darkIconContainer]: isDark,
                     })}
                 >
-                    <div onClick={ onSaveClick } className={styles.moreIcon}>
+                    <div onClick={ onSaveClick }>
                         { savedIndex === -1 ? <BookmarkIcon /> : <SaveBookmarkIcon /> }
                     </div>
                     {!isVisible && (
-                        <div onClick={ onClickMore } className={styles.moreIcon}>
+                        <div onClick={ onClickMore }>
                             <MoreIcon />
                         </div>
                     )}

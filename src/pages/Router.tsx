@@ -9,6 +9,8 @@ import Success from "./Success";
 import RegistrationConfirmation from "./RegistrationConfirmation";
 import Error404NotFound from "./Error404NotFound";
 import SelectedPost from "./SelectedPost";
+import ResetPassword from "./ResetPassword";
+import NewPassword from "./NewPassword";
 
 
 export enum RoutesList {
@@ -17,9 +19,11 @@ export enum RoutesList {
     Search = "/blog/search",
     SignIn = "/sign-in",
     SignUp = "/sign-up",
-    Confirm = "/sign-up/confirm",
+    Confirm = "/activate/:uid/:token",
     Success = "/sign-up/success",
     AddPost = "/blog/add",
+    Reset = "/sign-in/reset",
+    NewPassword = "/sign-in/reset/new-password",
     Default = "*",
 }
 const Router = () => {
@@ -38,6 +42,8 @@ const Router = () => {
                     <Route path={RoutesList.SignUp} element={<SignUp />} />
                     <Route path={RoutesList.Success} element={<Success />}/>
                     <Route path={RoutesList.Confirm} element={<RegistrationConfirmation />} />
+                    <Route path={RoutesList.Reset} element={<ResetPassword />} />
+                    <Route path={RoutesList.NewPassword} element={<NewPassword />} />
                     <Route path={RoutesList.Default} element={<Error404NotFound />} />
                 </Route>
             </Routes>
