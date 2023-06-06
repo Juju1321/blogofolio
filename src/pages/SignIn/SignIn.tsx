@@ -17,6 +17,8 @@ const SignIn = () => {
     const [password, setPassword] = useState("");
     const [emailError, setEmailError] = useState("");
     const [passwordError, setPasswordError] = useState("");
+    const [passwordTouched, setPasswordTouched] = useState(false);
+    const [emailTouched, setEmailTouched] = useState(false);
 
     const { theme } = useThemeContext();
     const isDark = theme === Theme.Dark;
@@ -25,9 +27,11 @@ const SignIn = () => {
 
     const onChangeEmail = (value: string) => setEmail(value);
     const onChangePassword = (value: string) => setPassword(value);
+    const onBlurEmail = () => setEmailTouched(true);
+    const onBlurPassword = () => setPasswordTouched(true);
 
     useEffect(() => {
-        if (email.length === 0) {
+        if (email.length === 0 && emailTouched) {
             setEmailError("Email is required field");
         } else {
             setEmailError("");
@@ -35,19 +39,22 @@ const SignIn = () => {
     }, [email]);
 
     useEffect(() => {
+        if (passwordTouched) 
         if (password.length === 0) {
             setPasswordError("Password is required field");
         } else {
             setPasswordError("");
         }
-    }, [password]);
+    }, [password, passwordTouched]);
 
     const isValid = useMemo(() => {
         return (
             emailError.length === 0 &&
-            passwordError.length === 0
+            passwordError.length === 0 &&
+            emailTouched &&
+            passwordTouched
         );
-    }, [emailError, passwordError]);
+    }, [emailError, passwordError, emailTouched, passwordTouched]);
 
     const onSignInClick = () => {
         dispatch(signInUser({data: {email, password}, callback: () => navigate(RoutesList.Home)}))
@@ -56,8 +63,8 @@ const SignIn = () => {
     return (
         <RegistrationContainer title={"Sign In"}>
                     <div className={styles.inputContainer}>
-                        <Input title={"Email"} placeholder={"Your email"} onChange={onChangeEmail} value={email} type={"text"} errorText={emailError}/>
-                        <Input title={"Password"} placeholder={"Your password"} onChange={onChangePassword} value={password} type={"password"} errorText={passwordError}/>
+                        <Input title={"Email"} onBlur={onBlurEmail} placeholder={"Your email"} onChange={onChangeEmail} value={email} type={"text"} errorText={emailError}/>
+                        <Input title={"Password"} onBlur={onBlurPassword} placeholder={"Your password"} onChange={onChangePassword} value={password} type={"password"} errorText={passwordError}/>
                     </div>
                     <NavLink to={RoutesList.Reset} className={classNames(styles.forgotPass, {
                         [styles.darkForgotPass]: isDark,

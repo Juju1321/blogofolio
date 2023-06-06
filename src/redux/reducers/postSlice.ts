@@ -2,7 +2,7 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 import {RootState} from "../store";
 import {CardListType, CardType} from "src/utils/@globalTypes";
-import {AddPostPayload, GetAllPostsPayload, SetAllPostsPayload} from "src/redux/reducers/@types";
+import {AddPostPayload, GetAllPostsPayload, SetAllPostsPayload, GetSearchPostsPayload, SetSearchedPostsPayload} from "src/redux/reducers/@types";
 
  export enum LikeStatus {
     Like = "like",
@@ -21,6 +21,8 @@ type InitialType = {
     searchedPosts: CardListType,
     searchValue: string,
     postsCount: number,
+    isAllPostsLoading: boolean;
+    searchedPostsCount: number;
 };
 
 const initialState: InitialType = {
@@ -35,6 +37,8 @@ const initialState: InitialType = {
     searchedPosts: [],
     searchValue: '',
     postsCount: 0,
+    isAllPostsLoading: false,
+    searchedPostsCount: 0,
 }
 
 const postSlice = createSlice( {
@@ -60,13 +64,25 @@ const postSlice = createSlice( {
         setMyPosts: (state, action: PayloadAction<CardListType>) => {
             state.myPosts = action.payload;
         },
-        getSearchedPosts: (state, action: PayloadAction<string>) => {
-            state.searchValue = action.payload
-        },
-        setSearchedPosts: (state, action: PayloadAction<CardListType>) => {
-            state.searchedPosts = action.payload
-        },
+        getSearchedPosts: (state, action: PayloadAction<GetSearchPostsPayload>) => {
+            state.searchValue = action.payload.searchValue;
+          },
+        setSearchedPosts: (
+            state,
+            action: PayloadAction<SetSearchedPostsPayload>
+          ) => {
+            const { isOverwrite, cardList, postsCount } = action.payload;
+            state.searchedPostsCount = postsCount;
+            if (isOverwrite) {
+              state.searchedPosts = cardList;
+            } else {
+              state.searchedPosts.push(...cardList);
+            }
+          },
         addNewPost: (_, __: PayloadAction<AddPostPayload>) => {},
+        setAllPostsLoading: (state, action: PayloadAction<boolean>) => {
+            state.isAllPostsLoading = action.payload
+        },
         setStatus: (state, action: PayloadAction<{status: LikeStatus, card: CardType}>) => {
             const { status, card } = action.payload;
             const likedIndex = state.likedPosts.findIndex(post => post.id === card.id);
@@ -116,6 +132,7 @@ export const {
     getSearchedPosts,
     setSearchedPosts,
     addNewPost,
+    setAllPostsLoading,
 } = postSlice.actions;
 export default postSlice.reducer;
 
@@ -131,4 +148,6 @@ export const PostSelectors = {
     getSearchedPosts: (state: RootState) => state.posts.searchedPosts,
     getSearchValue: (state: RootState) => state.posts.searchValue,
     getAllPostsCount: (state: RootState) => state.posts.postsCount,
+    getAllPostsLoading: (state: RootState) => state.posts.isAllPostsLoading,
+    getSearchedPostsCount: (state: RootState) => state.posts.searchedPostsCount,
 }

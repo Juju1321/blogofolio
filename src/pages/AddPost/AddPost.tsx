@@ -27,6 +27,8 @@ const AddPost = () => {
         setImages(imageList);
     };
 
+    const onCancelClick = () => navigate(RoutesList.Home)
+
     const onSubmit = () => {
         const formData = new FormData();
         formData.append("title", title);
@@ -42,6 +44,7 @@ const AddPost = () => {
             })
         );
     };
+
 
     return (
         <div className={styles.container}>
@@ -78,7 +81,6 @@ const AddPost = () => {
                           isDragging,
                           dragProps,
                       }) => (
-                        // write your building UI
                         <div className="upload__image-wrapper">
                             <div className={styles.title}>Image</div>
                             {imageList.length === 0 ? (
@@ -142,11 +144,12 @@ const AddPost = () => {
                     title="Delete post"
                     onClick={() => {}}
                     type={ButtonType.Error}
+                    disabled={true}
                 />
                 <div className={styles.actionButtonsContainer}>
                     <Button
                         title="Cancel"
-                        onClick={() => {}}
+                        onClick={onCancelClick}
                         type={ButtonType.Secondary}
                     />
                     <Button

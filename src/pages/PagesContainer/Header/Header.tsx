@@ -55,7 +55,8 @@ const Header = () => {
     const onClickSearchButton = () => {
         setInputOpened(!isInputOpened);
         if (isInputOpened) {
-            dispatch(getSearchedPosts(searchValue));
+            dispatch(getSearchedPosts({ searchValue, isOverwrite: true, offset: 0 }));
+            setSearchValue('')
             navigate(RoutesList.Search);
         }
     };
