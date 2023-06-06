@@ -15,6 +15,7 @@ import {ActivateUserPayload, SignInUserPayload, SignUpUserPayload} from "../redu
 import API from "../api";
 import {SignInResponse, SignUpUserResponse, UserInfoResponse} from "./@types";
 import {ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY} from "src/utils/constants";
+import callCheckingAuth from "src/redux/sagas/callCheckingAuth";
 
 function* signUpUserWorker(action:PayloadAction<SignUpUserPayload>) {
     const { data, callback }= action.payload
@@ -53,17 +54,16 @@ function* logoutUserWorker() {
     localStorage.removeItem(ACCESS_TOKEN_KEY);
     localStorage.removeItem(REFRESH_TOKEN_KEY);
     yield put(setLoggedIn(false));
+    yield put(setUserInfo(null));
 }
 
 function* getUserInfoWorker() {
-    const accessToken = localStorage.getItem(ACCESS_TOKEN_KEY);
-    if (accessToken) {
-        const {ok, problem, data}: ApiResponse<UserInfoResponse> = yield call(API.getUserInfo, accessToken);
-        if (ok && data) {
-            yield put(setUserInfo(data));
-        } else {
-            console.warn("Error user info", problem);
-        }
+    const { ok, problem, data }: ApiResponse<UserInfoResponse> =
+        yield callCheckingAuth(API.getUserInfo);
+    if (ok && data) {
+        yield put(setUserInfo(data));
+    } else {
+        console.warn("Error getting user info ", problem);
     }
 }
 

@@ -2,10 +2,18 @@ import { takeLatest, all, call, put } from "redux-saga/effects";
 import { ApiResponse } from "apisauce";
 import {PayloadAction} from "@reduxjs/toolkit";
 
-import {getALLPosts, getChosenPost, setAllPosts, setChosenPost} from "../reducers/postSlice";
+import {
+    getALLPosts,
+    getChosenPost,
+    getMyPosts,
+    setAllPosts,
+    setChosenPost,
+    setMyPosts
+} from "../reducers/postSlice";
 import API from "../api"
 import {AllPostsResponse} from "./@types";
 import {CardType} from "src/utils/@globalTypes";
+import callCheckingAuth from "src/redux/sagas/callCheckingAuth";
 
 function* getALLPostsWorker() {
     const { ok, data, problem }:ApiResponse<AllPostsResponse> = yield call(API.getPosts);
@@ -24,6 +32,19 @@ function* getChosenPostWorker(action:PayloadAction<string>) {
     }
 }
 
+function* getMyPostsWorker() {
+    const {ok, data, problem}: ApiResponse<AllPostsResponse> = yield callCheckingAuth(API.getMyPosts);
+    if (ok && data) {
+        yield put(setMyPosts(data.results))
+    }  else {
+        console.warn("Error getting user posts", problem)
+    }
+}
+
 export default function* postsSaga() {
-    yield all([takeLatest(getALLPosts, getALLPostsWorker), takeLatest(getChosenPost, getChosenPostWorker)]);
+    yield all([
+        takeLatest(getALLPosts, getALLPostsWorker),
+        takeLatest(getChosenPost, getChosenPostWorker),
+        takeLatest(getMyPosts, getMyPostsWorker),
+    ]);
 }
